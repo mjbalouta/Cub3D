@@ -8,14 +8,17 @@
  * @param game 
  * @param path 
  */
-void	define_texture(int direction, t_game *game, char *line)
+int	define_texture(int direction, t_game *game, char *line, int i)
 {
-	char	*path;
-
 	game->texture[direction].defined = 1;
-	//o path começa sempre por um ponto?
-	path = ft_strchr(line, '.');
-	game->texture[direction].path = path;
+	while(line[i] && line[i] != ' ')
+		i++;
+	while(line[i] && line[i] == ' ')
+		i++;
+	game->texture[direction].path = line + i;
+	//no final do path, tenho de verificar se existe mais alguma info? ou a
+	//verificação se abre com espaços no meio é suficiente para ser inválido?
+	return (0);
 }
 /**
  * @brief this function detects which direction is written in the line
@@ -24,22 +27,42 @@ void	define_texture(int direction, t_game *game, char *line)
  * @param game 
  * @return int 
  */
-int parse_line(char *line, t_game *game)
+int parse_texture_line(char *line, t_game *game)
 {
-	//Não pode ser hardcoded, acho que são permitidos espaços na posição 0...
-	if ((line[0] == "N" && line[1] == "O" && line[3] == " ") || line[0] == "N" && line[1] == " ")
-		define_texture(0, game, line);
-	else if ((line[0] == "S" && line[1] == "O" && line[3] == " ") || line[0] == "S" && line[1] == " ")
-		define_texture(1, game, line);
-	else if ((line[0] == "W" && line[1] == "E" && line[3] == " ") || line[0] == "W" && line[1] == " ")
-		define_texture(2, game, line);
-	else if ((line[0] == "E" && line[1] == "A" && line[3] == " ") || line[0] == "E" && line[1] == " ")
-		define_texture(3, game, line);
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] == ' ')
+			i++;
+	if (line[i])
+	{
+		if ((line[i] == 'N' && line[i + 1] == 'O'
+			&& line[i + 2] == ' ')	|| (line[i] == 'N' && line[i + 1] == ' '))
+			define_texture(0, game, line, i);
+		else if ((line[i] == 'S' && line[i + 1] == 'O'
+				&& line[i + 2] == ' ') || (line[i] == 'S' && line[i + 1] == ' '))
+			define_texture(1, game, line, i);
+		else if ((line[i] == 'W' && line[i + 1] == 'E'
+				&& line[i + 2] == ' ') || (line[i] == 'W' && line[i + 1] == ' '))
+			define_texture(2, game, line, i);
+		else if ((line[i] == 'E' && line[i + 1] == 'A'
+				&& line[i + 2] == ' ') || (line[i] == 'E' && line[i + 1] == ' '))
+			define_texture(3, game, line, i);
+		else
+			return (1);
+	}
 	else
 		return (1);
 	return (0);
 }
 
+/**
+ * @brief verifies if all the textures have been defined and if they're
+ * path is valid
+ * 
+ * @param game 
+ * @return int 
+ */
 int	verify_defined_textures(t_game *game)
 {
 	int			i;
@@ -61,4 +84,20 @@ int	verify_defined_textures(t_game *game)
 		i++;
 		close(fd);
 	}
+	return (0);
+}
+/**
+ * @brief calls functions to verify the lines that define the textures
+ * 
+ * @param line 
+ * @param game 
+ * @return int 
+ */
+int	validate_textures(char *line, t_game *game)
+{
+	if (parse_texture_line(line, game) != 0)
+		return (1);
+	if (verify_defined_textures(game) != 0)
+		return (1);
+	return (0);
 }

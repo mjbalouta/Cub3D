@@ -1,10 +1,12 @@
+#include "cub3d.h"
+
 /**
  * @brief this function verifies if the extension is .cub
  * 
  * @param str 
  * @return int 
  */
-int	validate_file_name(char *str)
+int	validate_filename(char *str)
 {
 	char *ext;
 
@@ -29,7 +31,7 @@ int validate_args(int ac, char **av)
 {
 	if (ac != 2)
 		return (ft_printf("The program must be run with only a .cub file"), 1);
-	if (validate_file_name(av[1]) != 0)
+	if (validate_filename(av[1]) != 0)
 		return (ft_printf("The program must be run with a something.cub file.\n"), 1);
 	return (0);
 }

@@ -8,6 +8,8 @@ SRCS			= $(addprefix srcs/, \
 				parsing/validate_args.c \
 				parsing/validate_file.c \
 				parsing/parse_textures_info.c \
+				parsing/parse_colors_info.c \
+				parsing/utils.c \
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft

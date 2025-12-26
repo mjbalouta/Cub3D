@@ -36,14 +36,27 @@ typedef struct s_game
 	t_map		*map;
 	int			collected;
 	int			floor_color;
+	char		*floor_code;
 	int			sky_color;
+	char		*sky_code;
 }	t_game;
 
 //--------------------------PARSING--------------------------
 
-int	validate_file_name(char *str);
-int	validate_file(char *file, t_game *game);
-int	parse_file_info(char *file, t_game *game);
-int parse_line(char *line, t_game *game);
+int		validate_filename(char *str);
+int		validate_args(int ac, char **av);
+int		validate_file(char *file, t_game *game);
+int		parse_file_info(char *file, t_game *game);
+int		parse_texture_line(char *line, t_game *game);
+int		define_texture(int direction, t_game *game, char *line, int i);
+int		parse_line(char *line, t_game *game);
+int		verify_defined_textures(t_game *game);
+int		validate_textures(char *line, t_game *game);
+void	define_colors(t_game *game, int i, char *line, int place);
+int		parse_color_line(char *line, t_game *game);
+int		validate_color_codes(t_game *game, char *code_str);
+int		validate_colors(char *line, t_game *game);
+void	free_arrays(char **strs);
+int		count_strings(char **strs);
 
 #endif
