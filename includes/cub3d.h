@@ -20,6 +20,7 @@ typedef struct s_map
 
 typedef struct s_tex
 {
+	int		defined;
     char    *path;
     char    *img;
     int     height;
@@ -30,7 +31,7 @@ typedef struct s_game
 {
 	void		*mlx_connection;
 	void		*mlx_window;
-	t_tex		texture[4];
+	t_tex		texture[4]; //[0]NO, [1]SO, [2]WE, [3]EA
 	t_player	*player;
 	t_map		*map;
 	int			collected;
@@ -41,5 +42,8 @@ typedef struct s_game
 //--------------------------PARSING--------------------------
 
 int	validate_file_name(char *str);
+int	validate_file(char *file, t_game *game);
+int	parse_file_info(char *file, t_game *game);
+int parse_line(char *line, t_game *game);
 
 #endif

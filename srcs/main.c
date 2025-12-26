@@ -2,6 +2,9 @@
 
 int main(int ac, char **av)
 {
-	if (ac != 2 || validate_file_name(av[1]) != 0)
-		return (ft_printf("The program must be run with a something.cub file.\n"));
+	t_game *game;
+
+	if (validate_args(ac, av) != 0 || validate_file(av[1], &game) != 0)
+		return (1);
+	return (0);
 }

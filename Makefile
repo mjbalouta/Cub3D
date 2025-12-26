@@ -5,7 +5,9 @@ INCLUDES		= -I$(INCLUDES_PATH)
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -g
 SRCS			= $(addprefix srcs/, \
 				main.c \
+				parsing/validate_args.c \
 				parsing/validate_file.c \
+				parsing/parse_textures_info.c \
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft
