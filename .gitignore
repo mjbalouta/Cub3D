@@ -1,0 +1,6 @@
+*.o
+cub3d
+.vscode
+libft.a
+libftprintf.a
+complete_libft.a
