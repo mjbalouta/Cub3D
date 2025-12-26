@@ -1,6 +1,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../libft/get-next-line/get_next_line.h"
+# include "../libft/libft/libft.h"
+# include "../libft/printf/libftprintf.h"
+
 typedef struct s_player
 {
 	int	x;
@@ -33,5 +37,9 @@ typedef struct s_game
 	int			floor_color;
 	int			sky_color;
 }	t_game;
+
+//--------------------------PARSING--------------------------
+
+int	validate_file_name(char *str);
 
 #endif
