@@ -1,5 +1,10 @@
+
 NO ./textures/image.png
 SO ./textures/image.png
 WE ./textures/image.png
 EA ./textures/image.png
 
+
+
+F 220,100,0
+C 225,30,0

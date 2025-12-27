@@ -15,19 +15,10 @@ int	parse_file_info(char *file, t_game *game)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		print_message_exit("Unable to open the file.", 1);
-	//alterar para outra função?
-	//parsing definitions of textures
 	if (validate_textures(game, fd) != 0)
-		print_message_exit("Error\nInvalid identifier.", 1);
-	//parsing floor and ceiling colors
-	// while (i < 2)
-	// {
-	// 	line = get_next_line(fd);
-	// 	if (validate_colors(line, game) != 0)
-	// 		print_message_exit("Error\nInvalid identifier.", 1);
-	// 	i++;
-	// 	free(line);
-	// }
+		print_message_exit("Error\nInvalid direction identifier.", 1);
+	if (validate_colors(game, fd) != 0)
+		print_message_exit("Error\nInvalid color identifier.", 1);
 	return (0);
 }
 /**

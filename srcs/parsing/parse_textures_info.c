@@ -32,7 +32,7 @@ int parse_texture_line(char *line, t_game *game)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] == ' ')
+	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
 			i++;
 	if (line[i] && line[i + 1] && line[i + 2])
 	{
@@ -103,8 +103,13 @@ int	validate_textures(t_game *game, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			return (1);
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue ;
+		}
 		if (parse_texture_line(line, game) != 0)
-			return (1);
+			return (free(line), 1);
 		free(line);
 		i++;
 	}

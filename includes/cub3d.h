@@ -55,7 +55,7 @@ int		validate_textures(t_game *game, int fd);
 void	define_colors(t_game *game, int i, char *line, int place);
 int		parse_color_line(char *line, t_game *game);
 int		validate_color_codes(t_game *game, char *code_str);
-int		validate_colors(char *line, t_game *game);
+int		validate_colors(t_game *game, int fd);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
 

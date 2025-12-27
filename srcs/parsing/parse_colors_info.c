@@ -15,14 +15,14 @@ void	define_colors(t_game *game, int i, char *line, int place)
 		game->floor_color = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
-		game->floor_code = line + i;
+		game->floor_code = ft_strtrim(line + i, "\n");
 	}
 	else if (place == 2)
 	{
 		game->sky_color = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
-		game->sky_code = line + i;
+		game->sky_code = ft_strtrim(line + i, "\n");
 	}
 }
 /**
@@ -85,7 +85,7 @@ int	validate_color_codes(t_game *game, char *code_str)
 		return (1);
 	while (code_str[i])
 	{
-		if (!ft_isdigit(code_str[i]) || code_str[i] != ',')
+		if (!ft_isdigit(code_str[i]) && code_str[i] != ',')
 			return (1);
 		i++;
 	}
@@ -105,10 +105,27 @@ int	validate_color_codes(t_game *game, char *code_str)
  * @param game 
  * @return int 
  */
-int	validate_colors(char *line, t_game *game)
+int	validate_colors(t_game *game, int fd)
 {
-	if (parse_color_line(line, game))
-		return (1);
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (i < 2)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (1);
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue ;
+		}
+		if (parse_color_line(line, game) != 0)
+			return (free(line), 1);
+		free(line);
+		i++;
+	}
 	if (validate_color_codes(game, game->floor_code) || validate_color_codes(game, game->sky_code))
 		return (1);
 	return (0);
