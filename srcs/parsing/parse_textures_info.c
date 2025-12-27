@@ -92,10 +92,22 @@ void	verify_defined_textures(t_game *game)
  * @param game 
  * @return int 
  */
-int	validate_textures(char *line, t_game *game)
+int	validate_textures(t_game *game, int fd)
 {
-	if (parse_texture_line(line, game) != 0)
-		return (1);
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (i < 4)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (1);
+		if (parse_texture_line(line, game) != 0)
+			return (1);
+		free(line);
+		i++;
+	}
 	verify_defined_textures(game);
 	return (0);
 }
