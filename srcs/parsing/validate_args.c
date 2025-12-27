@@ -29,9 +29,7 @@ int	validate_filename(char *str)
  */
 int validate_args(int ac, char **av)
 {
-	if (ac != 2)
-		return (ft_printf("The program must be run with only a .cub file"), 1);
-	if (validate_filename(av[1]) != 0)
-		return (ft_printf("The program must be run with a something.cub file.\n"), 1);
+	if (ac != 2 || validate_filename(av[1]) != 0)
+		print_message_exit("The program must be run with a something.cub file.", 1);
 	return (0);
 }

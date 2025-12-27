@@ -17,15 +17,16 @@ int	parse_file_info(char *file, t_game *game)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("Unable to open the file.\n"), -1);
+		print_message_exit("Unable to open the file.", 1);
 	//alterar para outra função?
 	//parsing definitions of textures
 	while (i < 4)
 	{
 		line = get_next_line(fd);
-		if (!line[i] && validate_textures(line, game) != 0)
-			return (ft_printf("Error\nInvalid identifier.\n"), 1);
-		i++;
+		if (!line)
+			return (1);
+		if (validate_textures(line, game) != 0)
+			print_message_exit("Error\nInvalid identifier.", 1);
 		free(line);
 	}
 	i = 0;
@@ -33,8 +34,8 @@ int	parse_file_info(char *file, t_game *game)
 	while (i < 2)
 	{
 		line = get_next_line(fd);
-		if (!line[i] && validate_colors(line, game) != 0)
-			return (ft_printf("Error\nInvalid identifier.\n"), 1);
+		if (validate_colors(line, game) != 0)
+			print_message_exit("Error\nInvalid identifier.", 1);
 		i++;
 		free(line);
 	}

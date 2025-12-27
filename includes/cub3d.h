@@ -59,4 +59,8 @@ int		validate_colors(char *line, t_game *game);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
 
+//---------------------------CLEAN---------------------------
+
+void	print_message_exit(char *message, int exit_code);
+
 #endif

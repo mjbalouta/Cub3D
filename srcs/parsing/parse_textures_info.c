@@ -34,7 +34,7 @@ int parse_texture_line(char *line, t_game *game)
 	i = 0;
 	while (line[i] && line[i] == ' ')
 			i++;
-	if (line[i])
+	if (line[i] && line[i + 1] && line[i + 2])
 	{
 		if ((line[i] == 'N' && line[i + 1] == 'O'
 			&& line[i + 2] == ' ')	|| (line[i] == 'N' && line[i + 1] == ' '))
@@ -79,7 +79,7 @@ int	verify_defined_textures(t_game *game)
 		if (fd < 0)
 		{
 			close(fd);
-			return (ft_printf("Error\nInvalid path in .cub file"), 1);
+			print_message_exit("Error\nInvalid path in .cub file", 1);
 		}
 		i++;
 		close(fd);
