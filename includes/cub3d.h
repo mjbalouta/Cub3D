@@ -50,7 +50,7 @@ int		parse_file_info(char *file, t_game *game);
 int		parse_texture_line(char *line, t_game *game);
 int		define_texture(int direction, t_game *game, char *line, int i);
 int		parse_line(char *line, t_game *game);
-int		verify_defined_textures(t_game *game);
+void	verify_defined_textures(t_game *game);
 int		validate_textures(char *line, t_game *game);
 void	define_colors(t_game *game, int i, char *line, int place);
 int		parse_color_line(char *line, t_game *game);

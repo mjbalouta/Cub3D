@@ -15,7 +15,7 @@ int	define_texture(int direction, t_game *game, char *line, int i)
 		i++;
 	while(line[i] && line[i] == ' ')
 		i++;
-	game->texture[direction].path = line + i;
+	game->texture[direction].path = ft_strtrim(line + i, "\n");
 	//no final do path, tenho de verificar se existe mais alguma info? ou a
 	//verificação se abre com espaços no meio é suficiente para ser inválido?
 	return (0);
@@ -63,7 +63,7 @@ int parse_texture_line(char *line, t_game *game)
  * @param game 
  * @return int 
  */
-int	verify_defined_textures(t_game *game)
+void	verify_defined_textures(t_game *game)
 {
 	int			i;
 	int			fd;
@@ -73,7 +73,7 @@ int	verify_defined_textures(t_game *game)
 	while (i < 4)
 	{
 		if (game->texture[i].defined != 1)
-			return (1);
+			print_message_exit("Not enough textures defined.", 1);
 		//verificar se a extensão da imagem é xpm?
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
@@ -84,7 +84,6 @@ int	verify_defined_textures(t_game *game)
 		i++;
 		close(fd);
 	}
-	return (0);
 }
 /**
  * @brief calls functions to verify the lines that define the textures
@@ -97,7 +96,6 @@ int	validate_textures(char *line, t_game *game)
 {
 	if (parse_texture_line(line, game) != 0)
 		return (1);
-	if (verify_defined_textures(game) != 0)
-		return (1);
+	verify_defined_textures(game);
 	return (0);
 }
