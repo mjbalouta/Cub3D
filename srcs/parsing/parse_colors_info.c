@@ -12,17 +12,17 @@ void	define_colors(t_game *game, int i, char *line, int place)
 {
 	if (place == 1)
 	{
-		game->floor_color = 1;
+		game->floor_color.defined = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
-		game->floor_code = ft_strtrim(line + i, "\n");
+		game->floor_color.code = ft_strtrim(line + i, "\n");
 	}
 	else if (place == 2)
 	{
-		game->sky_color = 1;
+		game->sky_color.defined = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
-		game->sky_code = ft_strtrim(line + i, "\n");
+		game->sky_color.code = ft_strtrim(line + i, "\n");
 	}
 }
 /**
@@ -58,7 +58,7 @@ int parse_color_line(char *line, t_game *game)
  * @param color_codes 
  * @return int 
  */
-int	verifies_numbers(char **color_codes)
+void	verify_numbers(char **color_codes, t_game *game, char option)
 {
 	int	nr;
 	int	i;
@@ -68,10 +68,13 @@ int	verifies_numbers(char **color_codes)
 	{
 		nr = ft_atoi(color_codes[i]);
 		if (nr < 0 || nr > 225)
-			return (1);
+			print_message_exit("Error\nInvalid color code. Must be between 0 and 255 only.", 1);
+		if (option == 'f')
+			game->floor_color.rgb[i] = nr;
+		else if (option == 's')
+			game->sky_color.rgb[i] = nr;
 		i++;
 	}
-	return (0);
 }
 /**
  * @brief verifies if the color code is a valid one
@@ -80,27 +83,27 @@ int	verifies_numbers(char **color_codes)
  * @param code_str 
  * @return int 
  */
-int	validate_color_codes(t_game *game, char *code_str)
+void	validate_color_codes(t_game *game, char *code_str, char option)
 {
 	int		i;
 	char	**color_codes;
 
 	i = 0;
-	if (game->floor_color != 1 || game->sky_color != 1)
-		return (1);
+	if (game->floor_color.defined != 1 || game->sky_color.defined != 1)
+		print_message_exit("Error\nColors for floor and ceiling must be defined.", 1);
 	while (code_str[i])
 	{
 		if (!ft_isdigit(code_str[i]) && code_str[i] != ',')
-			return (1);
+			print_message_exit("Error\nInvalid color code. Must be R,G,B codes only.", 1);
 		i++;
 	}
 	color_codes = ft_split(code_str, ',');
 	if (!color_codes)
-		return (1);
-	if (count_strings(color_codes) != 3 || verifies_numbers(color_codes) != 0)
-		return (free_arrays(color_codes), 1);
+		print_message_exit("Error\nInvalid color code. Must be R,G,B format.", 1);
+	if (count_strings(color_codes) != 3)
+		print_message_exit("Error\nInvalid color code.", 1);
+	verify_numbers(color_codes, game, option);
 	free_arrays(color_codes);
-	return (0);
 }
 /**
  * @brief calls functions to validate the lines that define the colors of the
@@ -131,7 +134,7 @@ int	validate_colors(t_game *game, int fd)
 		free(line);
 		i++;
 	}
-	if (validate_color_codes(game, game->floor_code) || validate_color_codes(game, game->sky_code))
-		return (1);
+	validate_color_codes(game, game->floor_color.code, 'f');
+	validate_color_codes(game, game->sky_color.code, 's');
 	return (0);
 }

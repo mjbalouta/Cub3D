@@ -27,6 +27,13 @@ typedef struct s_tex
     int     width;
 }	t_tex;
 
+typedef struct s_color
+{
+	int		defined;
+	char	*code;
+	int		rgb[3];
+}			t_color;
+
 typedef struct s_game
 {
 	void		*mlx_connection;
@@ -35,10 +42,8 @@ typedef struct s_game
 	t_player	*player;
 	t_map		*map;
 	int			collected;
-	int			floor_color;
-	char		*floor_code;
-	int			sky_color;
-	char		*sky_code;
+	t_color		floor_color;
+	t_color		sky_color;
 }	t_game;
 
 //--------------------------PARSING--------------------------
@@ -55,8 +60,9 @@ void	verify_defined_textures(t_game *game);
 int		validate_textures(t_game *game, int fd);
 void	define_colors(t_game *game, int i, char *line, int place);
 int		parse_color_line(char *line, t_game *game);
-int		validate_color_codes(t_game *game, char *code_str);
+void	validate_color_codes(t_game *game, char *code_str, char option);
 int		validate_colors(t_game *game, int fd);
+void	verify_numbers(char **color_codes, t_game *game, char option);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
 
