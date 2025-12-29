@@ -57,6 +57,22 @@ int parse_texture_line(char *line, t_game *game)
 }
 
 /**
+ * @brief checks if the texture's path extension is .xpm
+ * 
+ * @param path 
+ */
+void	check_extension(char *path)
+{
+	char	*extension;
+
+	extension = ft_strrchr(path, '.');
+	if (!extension)
+		print_message_exit("Error\nInvalid path in .cub file", 1);
+	if (ft_strncmp(extension, ".xpm", 5) != 0)
+		print_message_exit("Error\nTextures must be .xpm", 1);
+}
+
+/**
  * @brief verifies if all the textures have been defined and if they're
  * path is valid
  * 
@@ -74,7 +90,7 @@ void	verify_defined_textures(t_game *game)
 	{
 		if (game->texture[i].defined != 1)
 			print_message_exit("Not enough textures defined.", 1);
-		//verificar se a extensão da imagem é xpm?
+		check_extension(game->texture[i].path);
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
 		{
@@ -85,6 +101,7 @@ void	verify_defined_textures(t_game *game)
 		close(fd);
 	}
 }
+
 /**
  * @brief calls functions to verify the lines that define the textures
  * 

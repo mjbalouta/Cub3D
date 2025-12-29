@@ -1,8 +1,8 @@
 
-NO ./textures/image.png
-SO ./textures/image.png
-WE ./textures/image.png
-EA ./textures/image.png
+NO ./textures/image.xpm
+SO ./textures/image.xpm
+WE ./textures/image.xpm
+EA ./textures/image.xpm
 
 
 
