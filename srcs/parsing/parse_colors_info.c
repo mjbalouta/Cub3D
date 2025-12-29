@@ -39,10 +39,15 @@ int parse_color_line(char *line, t_game *game)
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	if (line[i] == 'F' && line[i + 1] == ' ')
-		define_colors(game, i + 1, line, 1);
-	else if (line[i] == 'C' && line[i + 1] == ' ')
-		define_colors(game, i + 1, line, 2);
+	if (line[i] && line[i + 1])
+	{
+		if (line[i] == 'F' && line[i + 1] == ' ')
+			define_colors(game, i + 1, line, 1);
+		else if (line[i] == 'C' && line[i + 1] == ' ')
+			define_colors(game, i + 1, line, 2);
+		else
+			return (1);
+	}
 	else
 		return (1);
 	return (0);

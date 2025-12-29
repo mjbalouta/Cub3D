@@ -6,7 +6,10 @@ void	free_arrays(char **strs)
 
 	i = 0;
 	while (strs[i])
+	{
 		free(strs[i]);
+		i++;
+	}
 	free(strs);
 }
 
