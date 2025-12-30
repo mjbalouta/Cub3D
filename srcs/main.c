@@ -8,6 +8,7 @@ int main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (ft_printf("Malloc game failed\n"));
-	init_game(&game);
+	init_game(game);
+	free (game);
 	return (0);
 }
