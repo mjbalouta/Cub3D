@@ -5,8 +5,14 @@ INCLUDES		= -I$(INCLUDES_PATH)
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -g
 SRCS			= $(addprefix srcs/, \
 				main.c \
+        init/init_game.c\
+				parsing/validate_args.c \
 				parsing/validate_file.c \
-				init/init_game.c\
+				parsing/parse_textures_info.c \
+				parsing/parse_colors_info.c \
+				parsing/utils.c \
+				parsing/parse_map.c \
+				clean/exit_functions.c \
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft
