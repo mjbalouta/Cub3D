@@ -49,9 +49,9 @@ typedef struct s_game
 //--------------------------PARSING--------------------------
 
 int		validate_filename(char *str);
-int		validate_args(int ac, char **av);
-int		validate_file(char *file, t_game *game);
-int		parse_file_info(char *file, t_game *game);
+void	validate_args(int ac, char **av);
+void	validate_file(char *file, t_game *game);
+void	parse_file_info(char *file, t_game *game);
 int		parse_texture_line(char *line, t_game *game);
 int		define_texture(int direction, t_game *game, char *line, int i);
 int		parse_line(char *line, t_game *game);
@@ -65,7 +65,8 @@ int		validate_colors(t_game *game, int fd);
 void	verify_numbers(char **color_codes, t_game *game, char option);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
-
+int		validate_map(t_game *game, int fd);
+int		create_map_copy(t_game *game, int fd);
 //---------------------------CLEAN---------------------------
 
 void	print_message_exit(char *message, int exit_code);
