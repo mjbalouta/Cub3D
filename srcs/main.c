@@ -34,7 +34,7 @@ void	print_parsing(t_game *game)
 
 int main(int ac, char **av)
 {
-	t_game game;
+	t_game	game;
 
 	ft_memset(&game, 0, sizeof(t_game));
 	validate_args(ac, av);
