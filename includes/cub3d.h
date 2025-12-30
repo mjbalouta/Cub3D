@@ -1,50 +1,7 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef PROTOTYPES_H
+# define PROTOTYPES_H
 
-# include "../libft/get-next-line/get_next_line.h"
-# include "../libft/libft/libft.h"
-# include "../libft/printf/libftprintf.h"
-
-typedef struct s_player
-{
-	int	x;
-	int	y;
-}	t_player;
-
-typedef struct s_map
-{
-	int	width;
-	int	height;
-	int	collectables;
-}	t_map;
-
-typedef struct s_tex
-{
-	int		defined;
-    char    *path;
-    char    *img;
-    int     height;
-    int     width;
-}	t_tex;
-
-typedef struct s_color
-{
-	int		defined;
-	char	*code;
-	int		rgb[3];
-}			t_color;
-
-typedef struct s_game
-{
-	void		*mlx_connection;
-	void		*mlx_window;
-	t_tex		texture[4]; //[0]NO, [1]SO, [2]WE, [3]EA
-	t_player	*player;
-	t_map		*map;
-	int			collected;
-	t_color		floor_color;
-	t_color		sky_color;
-}	t_game;
+#include "structs.h"
 
 //--------------------------PARSING--------------------------
 
@@ -66,9 +23,16 @@ void	verify_numbers(char **color_codes, t_game *game, char option);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
 int		validate_map(t_game *game, int fd);
-int		create_map_copy(t_game *game, int fd);
+char	**create_map_copy(t_game *game, int fd);
+
 //---------------------------CLEAN---------------------------
 
 void	print_message_exit(char *message, int exit_code);
+
+//--------------------------INIT-----------------------------
+
+void	init_game(t_game *game);
+void	init_texture_struct(t_game *game);
+void	init_color_struct(t_game *game);
 
 #endif

@@ -40,5 +40,10 @@ int main(int ac, char **av)
 	validate_args(ac, av);
 	validate_file(av[1], &game);
 	print_parsing(&game);
+	// game = malloc(sizeof(t_game));
+	// if (!game)
+	// 	return (ft_printf("Malloc game failed\n"));
+	init_game(&game);
+	// free(&game);
 	return (0);
 }
