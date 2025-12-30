@@ -34,15 +34,16 @@ void	print_parsing(t_game *game)
 
 int main(int ac, char **av)
 {
-	t_game	game;
-  ft_memset(&game, 0, sizeof(t_game));
+	t_game game;
+
+	ft_memset(&game, 0, sizeof(t_game));
 	validate_args(ac, av);
 	validate_file(av[1], &game);
 	print_parsing(&game);
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (ft_printf("Malloc game failed\n"));
-	init_game(game);
-	free (game);
+	// game = malloc(sizeof(t_game));
+	// if (!game)
+	// 	return (ft_printf("Malloc game failed\n"));
+	init_game(&game);
+	// free(&game);
 	return (0);
 }
