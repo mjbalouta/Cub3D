@@ -19,8 +19,7 @@ void	parse_file_info(char *file, t_game *game)
 		print_exit_free("Error\nInvalid direction identifier.", 1, game);
 	if (validate_colors(game, fd) != 0)
 		print_exit_free("Error\nInvalid color identifier.", 1, game);
-	// if (validate_map(game, fd) != 0)
-	// 	print_exit_free("Error\nInvalid map.", 1, game);
+	validate_map(game, fd);
 }
 /**
  * @brief this function calls other functions in order to validate the file

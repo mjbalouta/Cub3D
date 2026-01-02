@@ -22,3 +22,18 @@ int	count_strings(char **strs)
 		i++;
 	return (i);
 }
+
+int	list_size(t_map_file *map_list)
+{
+	int			size;
+	t_map_file	*temp;
+
+	size = 0;
+	temp = map_list;
+	while (temp)
+	{
+		size++;
+		temp = temp->next;
+	}
+	return (size);
+}

@@ -23,13 +23,16 @@ void	verify_numbers(char **color_codes, t_game *game, char option);
 void	free_arrays(char **strs);
 int		count_strings(char **strs);
 int		validate_map(t_game *game, int fd);
-char	**create_map_copy(t_game *game, int fd);
+void	create_linked_list(t_game *game, t_map_file **map_list, int fd);
+void	create_map_copy(t_map_file **map_list, t_game *game, int size);
+int		list_size(t_map_file *map_list);
 
 //---------------------------CLEAN---------------------------
 
 void	print_message_exit(char *message, int exit_code);
 void	free_mem(t_game *game);
 void	print_exit_free(char *message, int exit_code, t_game *game);
+void	free_list(t_map_file **map_list);
 
 //--------------------------INIT-----------------------------
 

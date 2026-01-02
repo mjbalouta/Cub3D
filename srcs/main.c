@@ -4,13 +4,13 @@ void	print_parsing(t_game *game)
 {
 	int i = 0;
 
-	ft_printf("TEXTURES:\n");
+	ft_printf("\nTEXTURES:\n");
 	while (i < 4)
 	{
 		ft_printf("%d  %s\n", game->texture[i].defined, game->texture[i].path);
 		i++;
 	}
-	ft_printf("COLORING:\n");
+	ft_printf("\nCOLORING:\n");
 	i = 0;
 	ft_printf("F %d ", game->floor_color.defined);
 	while (i < 3)
@@ -27,6 +27,14 @@ void	print_parsing(t_game *game)
 		ft_printf("%d", game->sky_color.rgb[i]);
 		if (i != 2)
 			ft_printf(",");
+		i++;
+	}
+	ft_printf("\n");
+	ft_printf("\nMAP:\n");
+	i = 0;
+	while (i < game->map.height)
+	{
+		ft_printf("%s", game->map.map[i]);
 		i++;
 	}
 	ft_printf("\n");

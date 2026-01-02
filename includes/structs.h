@@ -53,11 +53,11 @@ typedef struct s_game
 	t_color		sky_color;
 }	t_game;
 
-// //linked list to store the map from the file
-// typedef struct s_map_file
-// {
-// 	char		*line;
-// 	s_map_file	*next;
-// }				t_map_file;
+//linked list to store the map from the file
+typedef struct s_map_file
+{
+	char				*line;
+	struct s_map_file	*next;
+}				t_map_file;
 
 #endif
