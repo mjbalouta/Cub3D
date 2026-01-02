@@ -30,9 +30,9 @@ void	define_colors(t_game *game, int i, char *line, int place)
  * 
  * @param line 
  * @param game 
- * @return int 
+ * @return void
  */
-int parse_color_line(char *line, t_game *game)
+void	parse_color_line(char *line, t_game *game)
 {
 	int	i;
 
@@ -46,11 +46,16 @@ int parse_color_line(char *line, t_game *game)
 		else if (line[i] == 'C' && line[i + 1] == ' ')
 			define_colors(game, i + 1, line, 2);
 		else
-			return (1);
+		{
+			free(line);
+			print_exit_free("Error\nInvalid identifier.", 1, game);
+		}
 	}
 	else
-		return (1);
-	return (0);
+	{
+		free(line);
+		print_exit_free("Error\nInvalid identifier.", 1, game);
+	}
 }
 /**
  * @brief verifies if the color codes are between 0 and 255
@@ -68,7 +73,10 @@ void	verify_numbers(char **color_codes, t_game *game, char option)
 	{
 		nr = ft_atoi(color_codes[i]);
 		if (nr < 0 || nr > 225)
-			print_message_exit("Error\nInvalid color code. Must be between 0 and 255 only.", 1);
+		{
+			free_arrays(color_codes);
+			print_exit_free("Error\nInvalid color code. Must be between 0 and 255 only.", 1, game);
+		}
 		if (option == 'f')
 			game->floor_color.rgb[i] = nr;
 		else if (option == 's')
@@ -90,18 +98,21 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 
 	i = 0;
 	if (game->floor_color.defined != 1 || game->sky_color.defined != 1)
-		print_message_exit("Error\nColors for floor and ceiling must be defined.", 1);
+		print_exit_free("Error\nColors for floor and ceiling must be defined.", 1, game);
 	while (code_str[i])
 	{
 		if (!ft_isdigit(code_str[i]) && code_str[i] != ',')
-			print_message_exit("Error\nInvalid color code. Must be R,G,B codes only.", 1);
+			print_exit_free("Error\nInvalid color code. Must be R,G,B codes only.", 1, game);
 		i++;
 	}
 	color_codes = ft_split(code_str, ',');
 	if (!color_codes)
-		print_message_exit("Error\nInvalid color code. Must be R,G,B format.", 1);
+		print_exit_free("Error\nInvalid color code. Must be R,G,B format.", 1, game);
 	if (count_strings(color_codes) != 3)
-		print_message_exit("Error\nInvalid color code.", 1);
+	{
+		free_arrays(color_codes);
+		print_exit_free("Error\nInvalid color code.", 1, game);
+	}
 	verify_numbers(color_codes, game, option);
 	free_arrays(color_codes);
 }
@@ -129,8 +140,7 @@ int	validate_colors(t_game *game, int fd)
 			free(line);
 			continue ;
 		}
-		if (parse_color_line(line, game) != 0)
-			return (free(line), 1);
+		parse_color_line(line, game);
 		free(line);
 		i++;
 	}

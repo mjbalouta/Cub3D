@@ -13,6 +13,7 @@ SRCS			= $(addprefix srcs/, \
 				parsing/utils.c \
 				parsing/parse_map.c \
 				clean/exit_functions.c \
+				clean/free_mem.c \
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft

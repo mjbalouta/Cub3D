@@ -51,4 +51,5 @@ void	init_game(t_game *game)
 	game->map.height = 0;
 	game->map.map = NULL;
 	init_texture_struct(game);
+	init_color_struct(game);
 }

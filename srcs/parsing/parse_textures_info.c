@@ -8,7 +8,7 @@
  * @param game 
  * @param path 
  */
-int	define_texture(int direction, t_game *game, char *line, int i)
+void	define_texture(int direction, t_game *game, char *line, int i)
 {
 	game->texture[direction].defined = 1;
 	while(line[i] && line[i] != ' ')
@@ -18,7 +18,6 @@ int	define_texture(int direction, t_game *game, char *line, int i)
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
 	//no final do path, tenho de verificar se existe mais alguma info? ou a
 	//verificação se abre com espaços no meio é suficiente para ser inválido?
-	return (0);
 }
 /**
  * @brief this function detects which direction is written in the line
@@ -27,7 +26,7 @@ int	define_texture(int direction, t_game *game, char *line, int i)
  * @param game 
  * @return int 
  */
-int parse_texture_line(char *line, t_game *game)
+void	parse_texture_line(char *line, t_game *game)
 {
 	int	i;
 
@@ -49,11 +48,16 @@ int parse_texture_line(char *line, t_game *game)
 				&& line[i + 2] == ' ') || (line[i] == 'E' && line[i + 1] == ' '))
 			define_texture(3, game, line, i);
 		else
-			return (1);
+		{
+			free(line);
+			print_exit_free("Invalid identifier", 1, game);
+		}
 	}
 	else
-		return (1);
-	return (0);
+	{
+		free(line);
+		print_exit_free("Invalid identifier", 1, game);
+	}
 }
 
 /**
@@ -61,15 +65,15 @@ int parse_texture_line(char *line, t_game *game)
  * 
  * @param path 
  */
-void	check_extension(char *path)
+void	check_extension(char *path, t_game *game)
 {
 	char	*extension;
 
 	extension = ft_strrchr(path, '.');
 	if (!extension)
-		print_message_exit("Error\nInvalid path in .cub file", 1);
+		print_exit_free("Error\nInvalid path in .cub file", 1, game);
 	if (ft_strncmp(extension, ".xpm", 5) != 0)
-		print_message_exit("Error\nTextures must be .xpm", 1);
+		print_exit_free("Error\nTextures must be .xpm", 1, game);
 }
 
 /**
@@ -89,13 +93,13 @@ void	verify_defined_textures(t_game *game)
 	while (i < 4)
 	{
 		if (game->texture[i].defined != 1)
-			print_message_exit("Not enough textures defined.", 1);
-		check_extension(game->texture[i].path);
+			print_exit_free("Not enough textures defined.", 1, game);
+		check_extension(game->texture[i].path, game);
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
 		{
 			close(fd);
-			print_message_exit("Error\nInvalid path in .cub file", 1);
+			print_exit_free("Error\nInvalid path in .cub file", 1, game);
 		}
 		i++;
 		close(fd);
@@ -125,8 +129,7 @@ int	validate_textures(t_game *game, int fd)
 			free(line);
 			continue ;
 		}
-		if (parse_texture_line(line, game) != 0)
-			return (free(line), 1);
+		parse_texture_line(line, game);
 		free(line);
 		i++;
 	}

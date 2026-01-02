@@ -4,7 +4,7 @@
  * @brief this function verifies if the extension is .cub
  * 
  * @param str 
- * @return int 
+ * @return int
  */
 int	validate_filename(char *str)
 {
@@ -27,8 +27,8 @@ int	validate_filename(char *str)
  * @param av 
  * @return void 
  */
-void	validate_args(int ac, char **av)
+void	validate_args(int ac, char **av, t_game *game)
 {
 	if (ac != 2 || validate_filename(av[1]) != 0)
-		print_message_exit("The program must be run with a something.cub file.", 1);
+		print_exit_free("The program must be run with a something.cub file.", 1, game);
 }
