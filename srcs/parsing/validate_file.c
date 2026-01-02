@@ -12,6 +12,8 @@ void	parse_file_info(char *file, t_game *game)
 {
 	int		fd;
 
+	//!!!!!!Except for the map content which always has to be the last, each type of element can be set in any order in the file.!!!!!!
+	//!!!!!!Except for the map, each type of information from an element can be separated by one or more spaces.!!!!!!
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		print_exit_free("Unable to open the file.", 1, game);
