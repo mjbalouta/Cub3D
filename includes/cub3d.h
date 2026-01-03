@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../minilibx-linux/mlx.h"
 # include "../libft/get-next-line/get_next_line.h"
 # include "../libft/libft/libft.h"
 # include "../libft/printf/libftprintf.h"
@@ -51,5 +52,6 @@ int	validate_file_name(char *str);
 //--------------------------INIT-----------------------------
 
 void	init_game(t_game *game);
+void	init_mlx(t_game *game);
 
 #endif

@@ -9,6 +9,7 @@ int main(int ac, char **av)
 	if (!game)
 		return (ft_printf("Malloc game failed\n"));
 	init_game(game);
+	init_mlx(game);
 	free (game);
 	return (0);
 }

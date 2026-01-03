@@ -3,13 +3,16 @@ NAME        	= cub3d
 INCLUDES_PATH	= includes
 INCLUDES		= -I$(INCLUDES_PATH)
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -g
+MLX_FLAGS		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 SRCS			= $(addprefix srcs/, \
 				main.c \
 				parsing/validate_file.c \
 				init/init_game.c\
+				init/init_mlx.c\
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft
+MLX_DIR			= ./minilibx-linux
 LIBFT       	= $(LIBFT_DIR)/complete_libft.a
 
 all: $(NAME)
@@ -22,7 +25,7 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "Cub3D compiled."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	@echo "Removing objects..."
