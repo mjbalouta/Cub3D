@@ -21,12 +21,6 @@ void	create_linked_list(t_game *game, t_map_file **map_list, int fd)
 		print_exit_free("Error\nNonexisting map.", 1, game);
 	while (line != NULL)
 	{
-		if (line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
 		if (!head)
 		{
 			head = malloc(sizeof(t_map_file)); //this means that head will always point to the first node (just by allocating mem)

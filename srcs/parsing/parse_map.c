@@ -10,14 +10,19 @@ void	validate_characters(t_game *game)
 	int		i;
 	int		j;
 	char	**map;
+	int		start;
 
 	map = game->map.map;
 	i = 0;
+	start = 0;
 	while (map[i])
 	{
 		j = 0;
+		if (map[i][j] == '\n' && start == 1)
+			print_exit_free("Error\nThe map can't contain an empty line in the middle.", 1, game);
 		while (map[i][j] && map[i][j] != '\n')
 		{
+			start = 1;
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' &&
 				map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] == 'W' &&
 				map[i][j] != ' ')
@@ -71,6 +76,7 @@ int	validate_map(t_game *game, int fd)
 	t_map_file	*map_list;
 	int			size;
 
+	//is a map with a \n in the middle a valid one? NO - FIX THIS!!!
 	create_linked_list(game, &map_list, fd);
 	size = list_size(map_list);
 	create_map_copy(&map_list, game, size);
