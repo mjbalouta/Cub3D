@@ -33,6 +33,7 @@ int	count_strings(char **strs)
 		i++;
 	return (i);
 }
+
 /**
  * @brief counts the size of the map's linked list
  * 

@@ -44,4 +44,4 @@ void	free_mem(t_game *game)
 	if (game->map.map)
 		free(game->map.map);
 	// free_list(&map_list);
-	}
+}

@@ -13,7 +13,8 @@ void	define_colors(t_game *game, int i, char *line, int place)
 	if (place == 1)
 	{
 		if (game->floor_color.defined == 1)
-			print_exit_free("Error\nDuplicated definition of a color.", 1, game);
+			print_exit_free("Duplicated definition of a"
+				" color.", 1, game);
 		game->floor_color.defined = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
@@ -22,13 +23,15 @@ void	define_colors(t_game *game, int i, char *line, int place)
 	else if (place == 2)
 	{
 		if (game->sky_color.defined == 1)
-			print_exit_free("Error\nDuplicated definition of a color.", 1, game);
+			print_exit_free("Duplicated definition of a"
+				" color.", 1, game);
 		game->sky_color.defined = 1;
 		while (line[i] && line[i] == ' ')
 			i++;
 		game->sky_color.code = ft_strtrim(line + i, "\n");
 	}
 }
+
 /**
  * @brief identifies the place in which to apply the color
  * 
@@ -47,15 +50,16 @@ void	parse_color_line(char *line, t_game *game, int i)
 		else
 		{
 			free(line);
-			print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+			print_exit_free(ERROR_IDENTIFIER, 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+		print_exit_free(ERROR_IDENTIFIER, 1, game);
 	}
 }
+
 /**
  * @brief verifies if the color codes are between 0 and 255
  * 
@@ -74,7 +78,8 @@ void	verify_numbers(char **color_codes, t_game *game, char option)
 		if (nr < 0 || nr > 255)
 		{
 			free_arrays(color_codes);
-			print_exit_free("Error\nInvalid color code. Must be between 0 and 255 only.", 1, game);
+			print_exit_free("Invalid color code."
+				" Must be between 0 and 255 only.", 1, game);
 		}
 		if (option == 'f')
 			game->floor_color.rgb[i] = nr;
@@ -83,6 +88,7 @@ void	verify_numbers(char **color_codes, t_game *game, char option)
 		i++;
 	}
 }
+
 /**
  * @brief verifies if the color code is a valid one
  * 
@@ -95,25 +101,26 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 	int		i;
 	char	**color_codes;
 
-	i = 0;
+	i = -1;
 	if (game->floor_color.defined != 1 || game->sky_color.defined != 1)
-		print_exit_free("Error\nColors for floor and ceiling must be defined.", 1, game);
-	while (code_str[i])
+		print_exit_free("Colors for floor and ceiling must be"
+			" defined.", 1, game);
+	while (code_str[++i])
 	{
 		if (!ft_isdigit(code_str[i]) && code_str[i] != ',' && code_str[i] != ' '
 			&& code_str[i] != '+' && code_str[i] != '-')
-			print_exit_free("Error\nInvalid color code. Must be R,G,B codes only.", 1, game);
-		i++;
+			print_exit_free("Invalid color code. Must be R,G,B"
+				" codes only.", 1, game);
 	}
 	color_codes = ft_split(code_str, ',');
 	if (!color_codes)
-		print_exit_free("Error\nInvalid color code. Must be R,G,B format.", 1, game);
+		print_exit_free("Invalid color code. Must be R,G,B"
+			" format.", 1, game);
 	if (count_strings(color_codes) != 3)
 	{
 		free_arrays(color_codes);
-		print_exit_free("Error\nInvalid color code.", 1, game);
+		print_exit_free("Invalid color code.", 1, game);
 	}
-	i = 0;
 	verify_numbers(color_codes, game, option);
 	free_arrays(color_codes);
 }

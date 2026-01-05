@@ -1,7 +1,8 @@
 #include "cub3d.h"
 
 /**
- * @brief checks if the initial identifiers have been defined (textures and colors)
+ * @brief checks if the initial identifiers have been defined
+ * (textures and colors)
  * 
  * @param game 
  * @return int 
@@ -40,15 +41,16 @@ void	checks_identifier(char *line, t_game *game)
 
 	i = 0;
 	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
-			i++;
+		i++;
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		parse_texture_line(line, game, i);
 	else if (line[i] == 'F' || line[i] == 'C')
 		parse_color_line(line, game, i);
 	else if (line[i] == '1' && tracks_identified_info(game) == 1)
-		print_exit_free("Error\nMissing identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+		print_exit_free("Missing identifier. Expected definitions of NO, SO,"
+			" WE, EA and F, C first and then the map.", 1, game);
 	else
-		print_exit_free("Error\nIvalid identifier.", 1, game);
+		print_exit_free("Ivalid identifier.", 1, game);
 	// else if (line[i] == '1')
 	// 	validate_map(game, fd);
 }
@@ -68,12 +70,12 @@ void	parse_file_info(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		print_exit_free("Error\nUnable to open the file.", 1, game);
+		print_exit_free("Unable to open the file.", 1, game);
 	while (tracks_identified_info(game) == 1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			print_exit_free("Error\nEmpty file.", 1, game);
+			print_exit_free("Empty file.", 1, game);
 		if (line[0] == '\n')
 		{
 			free(line);
@@ -87,6 +89,7 @@ void	parse_file_info(char *file, t_game *game)
 	validate_color_codes(game, game->sky_color.code, 's');
 	validate_map(game, fd);
 }
+
 /**
  * @brief this function calls other functions in order to validate the file
  * 

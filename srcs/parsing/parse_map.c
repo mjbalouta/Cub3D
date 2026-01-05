@@ -10,31 +10,28 @@ void	validate_chars(t_game *game)
 	int		i;
 	int		j;
 	char	**map;
-	int		start;
 
 	map = game->map.map;
-	i = 0;
-	start = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
 		j = 0;
-		if (map[i][j] == '\n' && start == 1)
-			print_exit_free("Error\nThe map can't contain an empty"
+		if (map[i][j] == '\n')
+			print_exit_free("The map can't contain an empty"
 				" line in the middle.", 1, game);
 		while (map[i][j] && map[i][j] != '\n')
 		{
-			start = 1;
 			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N' ||
 				map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W' ||
 				map[i][j] == ' ')
-					j++;
+				j++;
 			else
-				print_exit_free("Error\nThe map contains invalid characters."
+				print_exit_free("The map contains invalid characters."
 					" Only 0, 1, N, S, E, W are valid.", 1, game);
 		}
-		i++;
 	}
 }
+
 /**
  * @brief returns 1 if tile is different than a wall (1)
  * 
@@ -69,15 +66,15 @@ void	check_walls(t_game *game)
 		while (map[i][++j] && map[i][j] != '\n')
 		{
 			if ((i == 0 || i == game->map.height - 1 || j == 0
-				|| j == line_size - 1) && map[i][j] != '1' && map[i][j] != ' ')
-				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);
-			if (map[i][j] == ' ' && i != game->map.height - 1 && map[i + 1][j] != '1'
-				&& map[i + 1][j] != ' ')
-				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);
+					|| j == line_size - 1) && !checks_walkable_chars(map[i][j]))
+				print_exit_free(WALLS_ERROR, 1, game);
+			if (map[i][j] == ' ' && i != game->map.height - 1
+				&& map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+				print_exit_free(WALLS_ERROR, 1, game);
 			if (checks_walkable_chars(map[i][j]) && (map[i - 1][j] == ' '
 				|| map[i + 1][j] == ' ' || map[i][j - 1] == ' '
 				|| map[i][j + 1] == ' '))
-				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);				
+				print_exit_free(WALLS_ERROR, 1, game);
 		}
 	}
 }
@@ -97,16 +94,17 @@ void	check_players(t_game *game)
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
 				players++;
 			j++;
 		}
 		i++;
 	}
 	if (players > 1)
-		print_exit_free("Error\nYou can only have one player in your map.", 1, game);
+		print_exit_free("You can only have one player in your map.", 1, game);
 	else if (players < 1)
-		print_exit_free("Error\nYou must have one player in your map.", 1, game);
+		print_exit_free("You must have one player in your map.", 1, game);
 }
 
 /**

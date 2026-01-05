@@ -11,14 +11,15 @@
 void	define_texture(int direction, t_game *game, char *line, int i)
 {
 	if (game->texture[direction].defined == 1)
-		print_exit_free("Error\nDuplicated definition of a texture.", 1, game);
+		print_exit_free("Duplicated definition of a texture.", 1, game);
 	game->texture[direction].defined = 1;
-	while(line[i] && line[i] != ' ')
+	while (line[i] && line[i] != ' ')
 		i++;
-	while(line[i] && line[i] == ' ')
+	while (line[i] && line[i] == ' ')
 		i++;
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
 }
+
 /**
  * @brief this function detects which direction is written in the line
  * 
@@ -30,28 +31,28 @@ void	parse_texture_line(char *line, t_game *game, int i)
 {
 	if (line[i] && line[i + 1] && line[i + 2])
 	{
-		if ((line[i] == 'N' && line[i + 1] == 'O'
-			&& line[i + 2] == ' ')	|| (line[i] == 'N' && line[i + 1] == ' '))
+		if ((line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
+			|| (line[i] == 'N' && line[i + 1] == ' '))
 			define_texture(0, game, line, i);
-		else if ((line[i] == 'S' && line[i + 1] == 'O'
-				&& line[i + 2] == ' ') || (line[i] == 'S' && line[i + 1] == ' '))
+		else if ((line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
+			|| (line[i] == 'S' && line[i + 1] == ' '))
 			define_texture(1, game, line, i);
-		else if ((line[i] == 'W' && line[i + 1] == 'E'
-				&& line[i + 2] == ' ') || (line[i] == 'W' && line[i + 1] == ' '))
+		else if ((line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
+			|| (line[i] == 'W' && line[i + 1] == ' '))
 			define_texture(2, game, line, i);
-		else if ((line[i] == 'E' && line[i + 1] == 'A'
-				&& line[i + 2] == ' ') || (line[i] == 'E' && line[i + 1] == ' '))
+		else if ((line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
+			|| (line[i] == 'E' && line[i + 1] == ' '))
 			define_texture(3, game, line, i);
 		else
 		{
 			free(line);
-			print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+			print_exit_free(ERROR_IDENTIFIER, 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+		print_exit_free(ERROR_IDENTIFIER, 1, game);
 	}
 }
 
@@ -66,9 +67,9 @@ void	check_extension(char *path, t_game *game)
 
 	extension = ft_strrchr(path, '.');
 	if (!extension)
-		print_exit_free("Error\nInvalid path in .cub file", 1, game);
+		print_exit_free("Invalid path in .cub file", 1, game);
 	if (ft_strncmp(extension, ".xpm", 5) != 0)
-		print_exit_free("Error\nTextures must be .xpm", 1, game);
+		print_exit_free("Textures must be .xpm", 1, game);
 }
 
 /**
@@ -88,16 +89,15 @@ void	verify_defined_textures(t_game *game)
 	while (i < 4)
 	{
 		if (game->texture[i].defined != 1)
-			print_exit_free("Error\nNot enough textures defined.", 1, game);
+			print_exit_free("Not enough textures defined.", 1, game);
 		check_extension(game->texture[i].path, game);
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
 		{
 			close(fd);
-			print_exit_free("Error\nInvalid path in .cub file", 1, game);
+			print_exit_free("Invalid path in .cub file", 1, game);
 		}
 		i++;
 		close(fd);
 	}
 }
-

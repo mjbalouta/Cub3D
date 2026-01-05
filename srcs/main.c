@@ -40,7 +40,7 @@ void	print_parsing(t_game *game)
 	ft_printf("\n");
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_game	game;
 
