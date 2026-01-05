@@ -45,8 +45,10 @@ void	checks_identifier(char *line, t_game *game)
 		parse_texture_line(line, game, i);
 	else if (line[i] == 'F' || line[i] == 'C')
 		parse_color_line(line, game, i);
-	else
-		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+	else if (line[i] == '1' && tracks_identified_info(game) == 1)
+		print_exit_free("Error\nMissing identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+	// else if (line[i] == '1')
+	// 	validate_map(game, fd);
 }
 
 /**
@@ -92,7 +94,5 @@ void	parse_file_info(char *file, t_game *game)
  */
 void	validate_file(char *file, t_game *game)
 {
-// 	!!!!!!Except for the map, each type of information from an element can be separated
-// by one or more spaces.!!!!!!
 	parse_file_info(file, game);
 }

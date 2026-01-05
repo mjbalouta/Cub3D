@@ -94,31 +94,6 @@ void	check_players(t_game *game)
 		print_exit_free("Error\nYou must have one player in your map.", 1, game);
 }
 
-// void	check_if_walkable(t_game *game)
-// {
-//O MAPA NAO PRECISA DE TER ZEROS???
-// 	int		i;
-// 	int		j;
-// 	int		count_floors;
-// 	char	**map;
-
-// 	i = 0;
-// 	count_floors = 0;
-// 	while (map[i])
-// 	{
-// 		j = 0;
-// 		while (map[i][j] && map[i][j] != '\n')
-// 		{
-// 			if (map[i][j] == '0')
-// 				count_floors++;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	if (count_floors == 0)
-// 		print_exit_free("Error\nYour map must be walkable (have a path of zeros).", 1, game);
-// }
-
 /**
  * @brief calls the validation functions to verify the map
  * 
@@ -137,7 +112,6 @@ int	validate_map(t_game *game, int fd)
 	free_list(&map_list);
 	validate_chars(game);
 	check_players(game);
-	// check_if_walkable(game);
 	check_walls(game); //should this include a flood fill for 0 surrounded by walls?
 	return (0);
 }

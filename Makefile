@@ -1,5 +1,5 @@
 CC          	= cc
-NAME        	= cub3d
+NAME        	= cub3D
 INCLUDES_PATH	= includes
 INCLUDES		= -I$(INCLUDES_PATH)
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -g
