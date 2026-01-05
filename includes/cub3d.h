@@ -24,6 +24,7 @@ int		validate_map(t_game *game, int fd);
 void	create_linked_list(t_game *game, t_map_file **map_list, int fd);
 void	create_map_copy(t_map_file **map_list, t_game *game, int size);
 int		list_size(t_map_file *map_list);
+void	check_players(t_game *game);
 
 //---------------------------CLEAN---------------------------
 

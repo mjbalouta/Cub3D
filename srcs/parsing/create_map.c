@@ -58,6 +58,8 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 		free_list(map_list);
 		print_exit_free("Error\nError allocating memory for the map.", 1, game);
 	}
+	while (ft_strncmp(temp->line, "\n", 1) == 0)
+		temp = temp->next;
 	while (temp)
 	{
 		game->map.map[i++] = ft_strdup(temp->line);

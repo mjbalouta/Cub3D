@@ -43,13 +43,13 @@ void	parse_color_line(char *line, t_game *game, int i)
 		else
 		{
 			free(line);
-			print_exit_free("Error\nInvalid identifier.", 1, game);
+			print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Error\nInvalid identifier.", 1, game);
+		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
 	}
 }
 /**
@@ -67,7 +67,7 @@ void	verify_numbers(char **color_codes, t_game *game, char option)
 	while (color_codes[i])
 	{
 		nr = ft_atoi(color_codes[i]);
-		if (nr < 0 || nr > 225)
+		if (nr < 0 || nr > 255)
 		{
 			free_arrays(color_codes);
 			print_exit_free("Error\nInvalid color code. Must be between 0 and 255 only.", 1, game);

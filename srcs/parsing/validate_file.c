@@ -46,7 +46,7 @@ void	checks_identifier(char *line, t_game *game)
 	else if (line[i] == 'F' || line[i] == 'C')
 		parse_color_line(line, game, i);
 	else
-		print_exit_free("Error\nInvalid identifier", 1, game);
+		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
 }
 
 /**
@@ -64,12 +64,12 @@ void	parse_file_info(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		print_exit_free("Unable to open the file.", 1, game);
+		print_exit_free("Error\nUnable to open the file.", 1, game);
 	while (tracks_identified_info(game) == 1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return ;
+			print_exit_free("Error\nEmpty file.", 1, game);
 		if (line[0] == '\n')
 		{
 			free(line);
@@ -92,5 +92,7 @@ void	parse_file_info(char *file, t_game *game)
  */
 void	validate_file(char *file, t_game *game)
 {
+// 	!!!!!!Except for the map, each type of information from an element can be separated
+// by one or more spaces.!!!!!!
 	parse_file_info(file, game);
 }

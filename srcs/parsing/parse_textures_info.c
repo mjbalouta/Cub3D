@@ -43,13 +43,13 @@ void	parse_texture_line(char *line, t_game *game, int i)
 		else
 		{
 			free(line);
-			print_exit_free("Error\nInvalid identifier", 1, game);
+			print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Error\nInvalid identifier", 1, game);
+		print_exit_free("Error\nInvalid identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
 	}
 }
 
@@ -86,7 +86,7 @@ void	verify_defined_textures(t_game *game)
 	while (i < 4)
 	{
 		if (game->texture[i].defined != 1)
-			print_exit_free("Not enough textures defined.", 1, game);
+			print_exit_free("Error\nNot enough textures defined.", 1, game);
 		check_extension(game->texture[i].path, game);
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
