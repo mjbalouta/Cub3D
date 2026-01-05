@@ -1,5 +1,10 @@
 #include "cub3d.h"
 
+/**
+ * @brief frees double char** arrays
+ * 
+ * @param strs 
+ */
 void	free_arrays(char **strs)
 {
 	int	i;
@@ -13,6 +18,12 @@ void	free_arrays(char **strs)
 	free(strs);
 }
 
+/**
+ * @brief counts the strings in a double char**
+ * 
+ * @param strs 
+ * @return int 
+ */
 int	count_strings(char **strs)
 {
 	int	i;
@@ -22,7 +33,12 @@ int	count_strings(char **strs)
 		i++;
 	return (i);
 }
-
+/**
+ * @brief counts the size of the map's linked list
+ * 
+ * @param map_list 
+ * @return int 
+ */
 int	list_size(t_map_file *map_list)
 {
 	int			size;

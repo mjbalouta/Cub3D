@@ -16,8 +16,6 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 	while(line[i] && line[i] == ' ')
 		i++;
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
-	//no final do path, tenho de verificar se existe mais alguma info? ou a
-	//verificação se abre com espaços no meio é suficiente para ser inválido?
 }
 /**
  * @brief this function detects which direction is written in the line
@@ -26,13 +24,8 @@ void	define_texture(int direction, t_game *game, char *line, int i)
  * @param game 
  * @return int 
  */
-void	parse_texture_line(char *line, t_game *game)
+void	parse_texture_line(char *line, t_game *game, int i)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
-			i++;
 	if (line[i] && line[i + 1] && line[i + 2])
 	{
 		if ((line[i] == 'N' && line[i + 1] == 'O'
@@ -50,13 +43,13 @@ void	parse_texture_line(char *line, t_game *game)
 		else
 		{
 			free(line);
-			print_exit_free("Invalid identifier", 1, game);
+			print_exit_free("Error\nInvalid identifier", 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Invalid identifier", 1, game);
+		print_exit_free("Error\nInvalid identifier", 1, game);
 	}
 }
 
@@ -106,33 +99,3 @@ void	verify_defined_textures(t_game *game)
 	}
 }
 
-/**
- * @brief calls functions to verify the lines that define the textures
- * 
- * @param line 
- * @param game 
- * @return int 
- */
-int	validate_textures(t_game *game, int fd)
-{
-	int		i;
-	char	*line;
-
-	i = 0;
-	while (i < 4)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (1);
-		if (line[0] == '\n')
-		{
-			free(line);
-			continue ;
-		}
-		parse_texture_line(line, game);
-		free(line);
-		i++;
-	}
-	verify_defined_textures(game);
-	return (0);
-}

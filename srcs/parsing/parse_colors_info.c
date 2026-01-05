@@ -32,13 +32,8 @@ void	define_colors(t_game *game, int i, char *line, int place)
  * @param game 
  * @return void
  */
-void	parse_color_line(char *line, t_game *game)
+void	parse_color_line(char *line, t_game *game, int i)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i++;
 	if (line[i] && line[i + 1])
 	{
 		if (line[i] == 'F' && line[i + 1] == ' ')
@@ -115,36 +110,4 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 	}
 	verify_numbers(color_codes, game, option);
 	free_arrays(color_codes);
-}
-/**
- * @brief calls functions to validate the lines that define the colors of the
- * ceiling and the floor
- * 
- * @param line 
- * @param game 
- * @return int 
- */
-int	validate_colors(t_game *game, int fd)
-{
-	int		i;
-	char	*line;
-
-	i = 0;
-	while (i < 2)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (1);
-		if (line[0] == '\n')
-		{
-			free(line);
-			continue ;
-		}
-		parse_color_line(line, game);
-		free(line);
-		i++;
-	}
-	validate_color_codes(game, game->floor_color.code, 'f');
-	validate_color_codes(game, game->sky_color.code, 's');
-	return (0);
 }

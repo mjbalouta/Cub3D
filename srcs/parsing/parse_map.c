@@ -1,11 +1,10 @@
 #include "cub3d.h"
 
-//criar primeiro uma linkedlist para fazer uma cópia dinâmica do mapa
-//depois calcular o list size
-//converter para um char ** para ser mais fácil executar as verificações
-//esta forma é melhor do que guardar a linha em que começa o mapa e abrir o
-//ficheiro duas vezes para construir o char **?
-
+/**
+ * @brief checks if there are invalid chars in the map
+ * 
+ * @param game 
+ */
 void	validate_characters(t_game *game)
 {
 	int		i;
@@ -29,6 +28,11 @@ void	validate_characters(t_game *game)
 	}
 }
 
+/**
+ * @brief checks if the map is surrounded by walls
+ * 
+ * @param game 
+ */
 void	check_walls(t_game *game)
 {
 	int		line_size;
@@ -55,6 +59,13 @@ void	check_walls(t_game *game)
 	}
 }
 
+/**
+ * @brief calls the validation functions to verify the map
+ * 
+ * @param game 
+ * @param fd 
+ * @return int 
+ */
 int	validate_map(t_game *game, int fd)
 {
 	t_map_file	*map_list;

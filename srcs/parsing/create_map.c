@@ -1,5 +1,13 @@
 #include "cub3d.h"
-	
+
+/**
+ * @brief reads the map from the file and creates a linked list
+ * containing each line of the map
+ * 
+ * @param game 
+ * @param map_list 
+ * @param fd 
+ */
 void	create_linked_list(t_game *game, t_map_file **map_list, int fd)
 {
 	t_map_file	*head;
@@ -36,6 +44,13 @@ void	create_linked_list(t_game *game, t_map_file **map_list, int fd)
 	*map_list = head;
 }
 
+/**
+ * @brief creates a copy of the map's linked list to a char**
+ * 
+ * @param map_list 
+ * @param game 
+ * @param size 
+ */
 void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 {
 	t_map_file	*temp;
