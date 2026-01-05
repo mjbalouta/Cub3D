@@ -51,8 +51,6 @@ void	checks_identifier(char *line, t_game *game)
 			" WE, EA and F, C first and then the map.", 1, game);
 	else
 		print_exit_free("Ivalid identifier.", 1, game);
-	// else if (line[i] == '1')
-	// 	validate_map(game, fd);
 }
 
 /**

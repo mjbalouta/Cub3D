@@ -5,9 +5,9 @@
 # include "../libft/libft/libft.h"
 # include "../libft/printf/libftprintf.h"
 
-#define WALLS_ERROR "The map must be surrounded by walls (1)"
+#define WALLS_ERROR "The map must be surrounded by walls (1)."
 #define ERROR_IDENTIFIER "Invalid identifier." \
-"Expected definitions of NO, SO, WE, EA and F, C first and then the map."
+" Expected definitions of NO, SO, WE, EA and F, C first and then the map."
 
 typedef struct s_player
 {

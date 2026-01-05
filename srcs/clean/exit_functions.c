@@ -8,7 +8,7 @@
  */
 void	print_message_exit(char *message, int exit_code)
 {
-	ft_printf("Error\n%s", message);
+	ft_printf("Error\n%s\n", message);
 	exit(exit_code);
 }
 
