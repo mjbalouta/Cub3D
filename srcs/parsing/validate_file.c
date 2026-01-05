@@ -47,6 +47,8 @@ void	checks_identifier(char *line, t_game *game)
 		parse_color_line(line, game, i);
 	else if (line[i] == '1' && tracks_identified_info(game) == 1)
 		print_exit_free("Error\nMissing identifier. Expected definitions of NO, SO, WE, EA and F, C first and then the map.", 1, game);
+	else
+		print_exit_free("Error\nIvalid identifier.", 1, game);
 	// else if (line[i] == '1')
 	// 	validate_map(game, fd);
 }

@@ -19,7 +19,8 @@ void	validate_chars(t_game *game)
 	{
 		j = 0;
 		if (map[i][j] == '\n' && start == 1)
-			print_exit_free("Error\nThe map can't contain an empty line in the middle.", 1, game);
+			print_exit_free("Error\nThe map can't contain an empty"
+				" line in the middle.", 1, game);
 		while (map[i][j] && map[i][j] != '\n')
 		{
 			start = 1;
@@ -28,10 +29,23 @@ void	validate_chars(t_game *game)
 				map[i][j] == ' ')
 					j++;
 			else
-				print_exit_free("Error\nThe map contains invalid characters. Only 0, 1, N, S, E, W are valid.", 1, game);
+				print_exit_free("Error\nThe map contains invalid characters."
+					" Only 0, 1, N, S, E, W are valid.", 1, game);
 		}
 		i++;
 	}
+}
+/**
+ * @brief returns 1 if tile is different than a wall (1)
+ * 
+ * @param tile 
+ * @return int 
+ */
+int	checks_walkable_chars(char tile)
+{
+	if (tile == '0' || tile == 'N' || tile == 'E' || tile == 'W' || tile == 'S')
+		return (1);
+	return (0);
 }
 
 /**
@@ -41,29 +55,30 @@ void	validate_chars(t_game *game)
  */
 void	check_walls(t_game *game)
 {
-	//I THINK THIS SHOULD BE A FLOOD_FILL IN ORDER TO CHECK IF THE PLAYER CAN REACH
-	//OUT OF BOUNDS
 	int		line_size;
 	int		i;
 	int		j;
 	char	**map;
 
-	i = 0;
+	i = -1;
 	map = game->map.map;
-	while (map[i])
+	while (map[++i])
 	{
 		line_size = ft_strlen(map[i]) - 1;
-		j = 0;
-		while (map[i][j] && map[i][j] != '\n')
+		j = -1;
+		while (map[i][++j] && map[i][j] != '\n')
 		{
 			if ((i == 0 || i == game->map.height - 1 || j == 0
 				|| j == line_size - 1) && map[i][j] != '1' && map[i][j] != ' ')
-					print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);
-			if (map[i][j] == ' ' && i != game->map.height - 1 && map[i + 1][j] != '1' && map[i + 1][j] != ' ')
 				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);
-			j++;
+			if (map[i][j] == ' ' && i != game->map.height - 1 && map[i + 1][j] != '1'
+				&& map[i + 1][j] != ' ')
+				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);
+			if (checks_walkable_chars(map[i][j]) && (map[i - 1][j] == ' '
+				|| map[i + 1][j] == ' ' || map[i][j - 1] == ' '
+				|| map[i][j + 1] == ' '))
+				print_exit_free("Error\nThe map must be surrounded by walls (1)", 1, game);				
 		}
-		i++;
 	}
 }
 
@@ -112,6 +127,6 @@ int	validate_map(t_game *game, int fd)
 	free_list(&map_list);
 	validate_chars(game);
 	check_players(game);
-	check_walls(game); //should this include a flood fill for 0 surrounded by walls?
+	check_walls(game);
 	return (0);
 }
