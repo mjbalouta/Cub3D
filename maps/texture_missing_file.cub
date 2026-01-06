@@ -1,5 +1,4 @@
-NO ./textures/image.xpm
-SO ./textures/missing.xpm
+SO 
 WE ./textures/image.xpm
 EA ./textures/image.xpm
 

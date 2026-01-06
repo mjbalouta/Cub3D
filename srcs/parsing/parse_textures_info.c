@@ -90,15 +90,19 @@ void	verify_defined_textures(t_game *game)
 	{
 		if (game->texture[i].defined != 1)
 			print_exit_free("Not enough textures defined.", 1, game);
-		//before checking extension, should I check if it is a directory?
+		if (!game->texture[i].path || ft_strncmp(game->texture[i].path, "", 1) == 0)
+			print_exit_free("Missing texture's path.", 1, game);
+		fd = open(game->texture[i].path, __O_DIRECTORY);
+		if (fd >= 0)
+		{
+			close(fd);
+			print_exit_free("Texture path is a directory.", 1, game);
+		}
 		check_extension(game->texture[i].path, game);
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
-		{
-			close(fd);
 			print_exit_free("Invalid path in .cub file", 1, game);
-		}
-		i++;
 		close(fd);
+		i++;
 	}
 }
