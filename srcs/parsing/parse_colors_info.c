@@ -16,7 +16,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 			print_exit_free("Duplicated definition of a"
 				" color.", 1, game);
 		game->floor_color.defined = 1;
-		while (line[i] && line[i] == ' ')
+		while (line[i] && is_whitespace(line[i]))
 			i++;
 		game->floor_color.code = ft_strtrim(line + i, "\n");
 	}
@@ -26,7 +26,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 			print_exit_free("Duplicated definition of a"
 				" color.", 1, game);
 		game->sky_color.defined = 1;
-		while (line[i] && line[i] == ' ')
+		while (line[i] && is_whitespace(line[i]))
 			i++;
 		game->sky_color.code = ft_strtrim(line + i, "\n");
 	}
@@ -43,9 +43,9 @@ void	parse_color_line(char *line, t_game *game, int i)
 {
 	if (line[i] && line[i + 1])
 	{
-		if (line[i] == 'F' && line[i + 1] == ' ')
+		if (line[i] == 'F' && is_whitespace(line[i + 1]))
 			define_colors(game, i + 1, line, 1);
-		else if (line[i] == 'C' && line[i + 1] == ' ')
+		else if (line[i] == 'C' && is_whitespace(line[i + 1]))
 			define_colors(game, i + 1, line, 2);
 		else
 		{
@@ -107,7 +107,7 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 			" defined.", 1, game);
 	while (code_str[++i])
 	{
-		if (!ft_isdigit(code_str[i]) && code_str[i] != ',' && code_str[i] != ' '
+		if (!ft_isdigit(code_str[i]) && code_str[i] != ',' && !is_whitespace(code_str[i])
 			&& code_str[i] != '+' && code_str[i] != '-')
 			print_exit_free("Invalid color code. Must be R,G,B"
 				" codes only.", 1, game);

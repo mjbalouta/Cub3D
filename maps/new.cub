@@ -1,0 +1,45 @@
+
+NO ./textures/image.xpm
+
+
+F 0, 255,	0
+SO ./textures/image.xpm
+C 225,30,0
+
+WE 		./textures/.xpm
+EA ./textures/image.xpm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+111111111111111    
+100000000000001    
+100W00000000011    
+111111111111111    

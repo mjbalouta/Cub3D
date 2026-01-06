@@ -13,9 +13,9 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 	if (game->texture[direction].defined == 1)
 		print_exit_free("Duplicated definition of a texture.", 1, game);
 	game->texture[direction].defined = 1;
-	while (line[i] && line[i] != ' ')
+	while (line[i] && !is_whitespace(line[i]))
 		i++;
-	while (line[i] && line[i] == ' ')
+	while (line[i] && is_whitespace(line[i]))
 		i++;
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
 }
@@ -31,17 +31,17 @@ void	parse_texture_line(char *line, t_game *game, int i)
 {
 	if (line[i] && line[i + 1] && line[i + 2])
 	{
-		if ((line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-			|| (line[i] == 'N' && line[i + 1] == ' '))
+		if ((line[i] == 'N' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'N' && is_whitespace(line[i + 1])))
 			define_texture(0, game, line, i);
-		else if ((line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-			|| (line[i] == 'S' && line[i + 1] == ' '))
+		else if ((line[i] == 'S' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'S' && is_whitespace(line[i + 1])))
 			define_texture(1, game, line, i);
-		else if ((line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-			|| (line[i] == 'W' && line[i + 1] == ' '))
+		else if ((line[i] == 'W' && line[i + 1] == 'E' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'W' && is_whitespace(line[i + 1])))
 			define_texture(2, game, line, i);
-		else if ((line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-			|| (line[i] == 'E' && line[i + 1] == ' '))
+		else if ((line[i] == 'E' && line[i + 1] == 'A' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'E' && is_whitespace(line[i + 1])))
 			define_texture(3, game, line, i);
 		else
 		{

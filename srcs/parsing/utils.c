@@ -54,3 +54,16 @@ int	list_size(t_map_file *map_list)
 	}
 	return (size);
 }
+
+/**
+ * @brief detects whitespaces
+ * 
+ * @param a 
+ * @return int 
+ */
+int	is_whitespace(char a)
+{
+	if ((a >= 9 && a <= 13) || a == ' ')
+		return (1);
+	return (0);
+}

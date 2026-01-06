@@ -23,7 +23,7 @@ void	validate_chars(t_game *game)
 		{
 			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N' ||
 				map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W' ||
-				map[i][j] == ' ')
+				is_whitespace(map[i][j]))
 				j++;
 			else
 				print_exit_free("The map contains invalid characters."
@@ -66,14 +66,14 @@ void	check_walls(t_game *game)
 		while (map[i][++j] && map[i][j] != '\n')
 		{
 			if ((i == 0 || i == game->map.height - 1 || j == 0
-					|| j == line_size - 1) && !checks_walkable_chars(map[i][j]))
+					|| j == line_size - 1) && checks_walkable_chars(map[i][j]))
 				print_exit_free(WALLS_ERROR, 1, game);
-			if (map[i][j] == ' ' && i != game->map.height - 1
-				&& map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+			if (is_whitespace(map[i][j]) && i != game->map.height - 1
+				&& map[i + 1][j] != '1' && !is_whitespace(map[i + 1][j]))
 				print_exit_free(WALLS_ERROR, 1, game);
-			if (checks_walkable_chars(map[i][j]) && (map[i - 1][j] == ' '
-				|| map[i + 1][j] == ' ' || map[i][j - 1] == ' '
-				|| map[i][j + 1] == ' '))
+			if (checks_walkable_chars(map[i][j]) && (is_whitespace(map[i - 1][j])
+				|| is_whitespace(map[i + 1][j]) || is_whitespace(map[i][j - 1])
+				|| is_whitespace(map[i][j + 1])))
 				print_exit_free(WALLS_ERROR, 1, game);
 		}
 	}

@@ -26,6 +26,7 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size);
 int		list_size(t_map_file *map_list);
 void	check_players(t_game *game);
 int		tracks_identified_info(t_game *game);
+int		is_whitespace(char a);
 
 //---------------------------CLEAN---------------------------
 

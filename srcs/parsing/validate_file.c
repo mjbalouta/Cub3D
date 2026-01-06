@@ -40,7 +40,7 @@ void	checks_identifier(char *line, t_game *game)
 	int	i;
 
 	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
+	while (line[i] && (is_whitespace(line[i]) || line[i] == '\n'))
 		i++;
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		parse_texture_line(line, game, i);
@@ -52,7 +52,6 @@ void	checks_identifier(char *line, t_game *game)
 	else
 		print_exit_free("Ivalid identifier.", 1, game);
 }
-
 /**
  * @brief this function opens the .cub file, reads it line by line and calls
  * parse_line() to verify each line
