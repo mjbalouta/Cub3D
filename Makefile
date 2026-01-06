@@ -1,5 +1,5 @@
 CC          	= cc
-NAME        	= cub3d
+NAME        	= cub3D
 INCLUDES_PATH	= includes
 INCLUDES		= -I$(INCLUDES_PATH)
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -I$(MLX_DIR) -g
@@ -14,6 +14,8 @@ SRCS			= $(addprefix srcs/, \
 				parsing/parse_textures_info.c \
 				parsing/parse_colors_info.c \
 				parsing/utils.c \
+				parsing/utils2.c \
+				parsing/create_map.c \
 				parsing/parse_map.c \
 				clean/exit_functions.c \
 				clean/free_mem.c \

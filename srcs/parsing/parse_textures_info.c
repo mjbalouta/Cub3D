@@ -10,15 +10,16 @@
  */
 void	define_texture(int direction, t_game *game, char *line, int i)
 {
+	if (game->texture[direction].defined == 1)
+		print_exit_free("Duplicated definition of a texture.", 1, game);
 	game->texture[direction].defined = 1;
-	while(line[i] && line[i] != ' ')
+	while (line[i] && !is_whitespace(line[i]))
 		i++;
-	while(line[i] && line[i] == ' ')
+	while (line[i] && is_whitespace(line[i]))
 		i++;
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
-	//no final do path, tenho de verificar se existe mais alguma info? ou a
-	//verificação se abre com espaços no meio é suficiente para ser inválido?
 }
+
 /**
  * @brief this function detects which direction is written in the line
  * 
@@ -26,37 +27,32 @@ void	define_texture(int direction, t_game *game, char *line, int i)
  * @param game 
  * @return int 
  */
-void	parse_texture_line(char *line, t_game *game)
+void	parse_texture_line(char *line, t_game *game, int i)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\n'))
-			i++;
 	if (line[i] && line[i + 1] && line[i + 2])
 	{
-		if ((line[i] == 'N' && line[i + 1] == 'O'
-			&& line[i + 2] == ' ')	|| (line[i] == 'N' && line[i + 1] == ' '))
+		if ((line[i] == 'N' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'N' && is_whitespace(line[i + 1])))
 			define_texture(0, game, line, i);
-		else if ((line[i] == 'S' && line[i + 1] == 'O'
-				&& line[i + 2] == ' ') || (line[i] == 'S' && line[i + 1] == ' '))
+		else if ((line[i] == 'S' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'S' && is_whitespace(line[i + 1])))
 			define_texture(1, game, line, i);
-		else if ((line[i] == 'W' && line[i + 1] == 'E'
-				&& line[i + 2] == ' ') || (line[i] == 'W' && line[i + 1] == ' '))
+		else if ((line[i] == 'W' && line[i + 1] == 'E' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'W' && is_whitespace(line[i + 1])))
 			define_texture(2, game, line, i);
-		else if ((line[i] == 'E' && line[i + 1] == 'A'
-				&& line[i + 2] == ' ') || (line[i] == 'E' && line[i + 1] == ' '))
+		else if ((line[i] == 'E' && line[i + 1] == 'A' && is_whitespace(line[i + 2]))
+			|| (line[i] == 'E' && is_whitespace(line[i + 1])))
 			define_texture(3, game, line, i);
 		else
 		{
 			free(line);
-			print_exit_free("Invalid identifier", 1, game);
+			print_exit_free(ERROR_IDENTIFIER, 1, game);
 		}
 	}
 	else
 	{
 		free(line);
-		print_exit_free("Invalid identifier", 1, game);
+		print_exit_free(ERROR_IDENTIFIER, 1, game);
 	}
 }
 
@@ -65,15 +61,20 @@ void	parse_texture_line(char *line, t_game *game)
  * 
  * @param path 
  */
-void	check_extension(char *path, t_game *game)
+void	check_path_name(char *path, t_game *game)
 {
 	char	*extension;
+	char	*file;
 
+	file = ft_strrchr(path, '/');
+	file++;
+	if (ft_strlen(file) <= 4)
+		print_exit_free("Invalid path. Must be something.xpm.", 1, game);
 	extension = ft_strrchr(path, '.');
 	if (!extension)
-		print_exit_free("Error\nInvalid path in .cub file", 1, game);
+		print_exit_free("Invalid path in .cub file.", 1, game);
 	if (ft_strncmp(extension, ".xpm", 5) != 0)
-		print_exit_free("Error\nTextures must be .xpm", 1, game);
+		print_exit_free("Textures must be .xpm.", 1, game);
 }
 
 /**
@@ -88,51 +89,25 @@ void	verify_defined_textures(t_game *game)
 	int			i;
 	int			fd;
 
-	i = 0;
+	i = -1;
 	fd = -1;
-	while (i < 4)
+	while (++i < 4)
 	{
 		if (game->texture[i].defined != 1)
 			print_exit_free("Not enough textures defined.", 1, game);
-		check_extension(game->texture[i].path, game);
-		fd = open(game->texture[i].path, O_RDONLY);
-		if (fd < 0)
+		if (!game->texture[i].path
+			|| ft_strncmp(game->texture[i].path, "", 1) == 0)
+			print_exit_free("Missing texture's path.", 1, game);
+		check_path_name(game->texture[i].path, game);
+		fd = open(game->texture[i].path, __O_DIRECTORY);
+		if (fd >= 0)
 		{
 			close(fd);
-			print_exit_free("Error\nInvalid path in .cub file", 1, game);
+			print_exit_free("Texture path is a directory.", 1, game);
 		}
-		i++;
+		fd = open(game->texture[i].path, O_RDONLY);
+		if (fd < 0)
+			print_exit_free("Unable to open a texture's path.", 1, game);
 		close(fd);
 	}
-}
-
-/**
- * @brief calls functions to verify the lines that define the textures
- * 
- * @param line 
- * @param game 
- * @return int 
- */
-int	validate_textures(t_game *game, int fd)
-{
-	int		i;
-	char	*line;
-
-	i = 0;
-	while (i < 4)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (1);
-		if (line[0] == '\n')
-		{
-			free(line);
-			continue ;
-		}
-		parse_texture_line(line, game);
-		free(line);
-		i++;
-	}
-	verify_defined_textures(game);
-	return (0);
 }

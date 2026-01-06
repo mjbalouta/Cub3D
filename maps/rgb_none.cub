@@ -1,0 +1,19 @@
+<<<<<<< HEAD:1.cub
+
+NO ./textures/NO-Wall.xpm
+SO ./textures/SO-Wall.xpm
+WE ./textures/WE-Wall.xpm
+EA ./textures/EA-Wall.xpm
+=======
+NO ./textures/image.xpm
+SO ./textures/image.xpm
+WE ./textures/image.xpm
+EA ./textures/image.xpm
+>>>>>>> dev:maps/rgb_none.cub
+
+
+
+11111111
+10000S01
+10000001
+11111111

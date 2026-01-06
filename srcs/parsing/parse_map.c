@@ -1,43 +1,130 @@
 #include "cub3d.h"
 
-// char	**create_map_copy(t_game *game, int fd)
-// {
-// 	char	*line;
-// 	// int		size;
-// 	// char	**map_copy;
-// 	int		i;
+/**
+ * @brief checks if there are invalid chars in the map
+ * 
+ * @param game 
+ */
+void	validate_chars(t_game *game)
+{
+	int		i;
+	int		j;
+	char	**map;
 
-// 	//criar primeiro uma linkedlist para fazer uma cópia dinâmica do mapa
-// 	//depois calcular o list size
-// 	//converter para um char ** para ser mais fácil executar as verificações
-// 	//esta forma é melhor do que guardar a linha em que começa o mapa e abrir o
-// 	//ficheiro duas vezes para construir o char **?
-// 	i = 0;
-// 	line = get_next_line(fd);
-// 	if (!line)
-// 		return (NULL);
-// 	// ft_strlcpy(map_copy[i], line, ft_strlen(line) + 1);
-// 	game->map.height++;
-// 	i++;
-// 	while (line)
-// 	{
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			return (NULL);
-// 		// ft_strlcpy(map_copy[i], line, ft_strlen(line) + 1);
-// 		game->map.height++;
-// 		i++;
-// 	}
-// 	return (map_copy);
-// }
+	map = game->map.map;
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		if (map[i][j] == '\n')
+			print_exit_free("The map can't contain an empty"
+				" line in the middle.", 1, game);
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N' ||
+				map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W' ||
+				is_whitespace(map[i][j]))
+				j++;
+			else
+				print_exit_free("The map contains invalid characters."
+					" Only 0, 1, N, S, E, W are valid.", 1, game);
+		}
+	}
+}
 
-// int	validate_map(t_game *game, int fd)
-// {
-// 	// int	height;
+/**
+ * @brief returns 1 if tile is different than a wall (1)
+ * 
+ * @param tile 
+ * @return int 
+ */
+int	checks_walkable_chars(char tile)
+{
+	if (tile == '0' || tile == 'N' || tile == 'E' || tile == 'W' || tile == 'S')
+		return (1);
+	return (0);
+}
 
-// 	// height = count_map_lines(fd);
-// 	// ft_printf("\n%d\n", height);
-// 	(void)*game;
-// 	return (0);
-// }
+/**
+ * @brief checks if the map is surrounded by walls
+ * 
+ * @param game 
+ */
+void	check_walls(t_game *game)
+{
+	int		line_size;
+	int		i;
+	int		j;
+	char	**map;
+
+	i = -1;
+	map = game->map.map;
+	while (map[++i])
+	{
+		line_size = ft_strlen(map[i]) - 1;
+		j = -1;
+		while (map[i][++j] && map[i][j] != '\n')
+		{
+			if ((i == 0 || i == game->map.height - 1 || j == 0
+					|| j == line_size - 1) && checks_walkable_chars(map[i][j]) && !is_whitespace(map[i][j]))
+				print_exit_free(WALLS_ERROR, 1, game);
+			if (is_whitespace(map[i][j]) && i != game->map.height - 1
+				&& map[i + 1][j] != '1' && !is_whitespace(map[i + 1][j]))
+				print_exit_free(WALLS_ERROR, 1, game);
+			if (checks_walkable_chars(map[i][j]) && (is_whitespace(map[i - 1][j])
+				|| is_whitespace(map[i + 1][j]) || is_whitespace(map[i][j - 1])
+				|| is_whitespace(map[i][j + 1])))
+				print_exit_free(WALLS_ERROR, 1, game);
+		}
+	}
+}
+
+void	check_players(t_game *game)
+{
+	int		i;
+	int		j;
+	char	**map;
+	int		players;
+
+	map = game->map.map;
+	i = 0;
+	players = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+				players++;
+			j++;
+		}
+		i++;
+	}
+	if (players > 1)
+		print_exit_free("You can only have one player in your map.", 1, game);
+	else if (players < 1)
+		print_exit_free("You must have one player in your map.", 1, game);
+}
+
+/**
+ * @brief calls the validation functions to verify the map
+ * 
+ * @param game 
+ * @param fd 
+ * @return int 
+ */
+int	validate_map(t_game *game, int fd)
+{
+	t_map_file	*map_list;
+	int			size;
+
+	create_linked_list(game, &map_list, fd);
+	size = list_size(map_list);
+	create_map_copy(&map_list, game, size);
+	free_list(&map_list);
+	validate_chars(game);
+	check_players(game);
+	check_walls(game);
+	return (0);
+}
