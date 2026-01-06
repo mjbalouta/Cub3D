@@ -15,7 +15,7 @@ void	load_textures(t_game *game)
 			&game->texture[i].width
 		);
 		if (!game->texture[i].img)
-			printf("Failed to load texture\n");
+			print_exit_free("Failed to load texture", 1, game);
 		game->texture[i].addr = mlx_get_data_addr(
 			game->texture[i].img,
 			&game->texture[i].bpp,
@@ -23,7 +23,7 @@ void	load_textures(t_game *game)
 			&game->texture[i].endian
 		);
 		if (!game->texture[i].addr)
-			printf("Failed to load texture\n");
+			print_exit_free("Failed to load texture", 1, game);
 		i++;
 	}
 }
