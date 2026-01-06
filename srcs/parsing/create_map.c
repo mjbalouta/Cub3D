@@ -22,12 +22,12 @@ void	create_linked_list(t_game *game, t_map_file **map_list, int fd)
 	{
 		if (!head)
 		{
-			head = malloc(sizeof(t_map_file)); //this means that head will always point to the first node (just by allocating mem)
+			head = malloc(sizeof(t_map_file));
 			current = head;
 		}
 		else
 		{
-			current->next = malloc(sizeof(t_map_file)); //allocates mem for a new node
+			current->next = malloc(sizeof(t_map_file));
 			current = current->next;
 		}
 		current->line = line;
