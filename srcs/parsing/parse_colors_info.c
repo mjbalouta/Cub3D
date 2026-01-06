@@ -70,22 +70,26 @@ void	verify_numbers(char **color_codes, t_game *game, char option)
 {
 	int	nr;
 	int	i;
+	int	count_before;
+	int	count_after;
 
-	i = 0;
-	while (color_codes[i])
+	i = -1;
+	count_after = 0;
+	count_before = 0;
+	while (color_codes[++i])
 	{
+		count_before = count_digits_string(color_codes[i]);
 		nr = ft_atoi(color_codes[i]);
-		if (nr < 0 || nr > 255)
+		count_after = count_digits_numbers(nr);
+		if (nr < 0 || nr > 255 || count_before != count_after)
 		{
 			free_arrays(color_codes);
-			print_exit_free("Invalid color code."
-				" Must be between 0 and 255 only.", 1, game);
+			print_exit_free(COLOR_FORMAT_ERROR, 1, game);
 		}
 		if (option == 'f')
 			game->floor_color.rgb[i] = nr;
 		else if (option == 's')
 			game->sky_color.rgb[i] = nr;
-		i++;
 	}
 }
 

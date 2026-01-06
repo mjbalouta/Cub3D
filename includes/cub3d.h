@@ -27,6 +27,9 @@ int		list_size(t_map_file *map_list);
 void	check_players(t_game *game);
 int		tracks_identified_info(t_game *game);
 int		is_whitespace(char a);
+int		count_digits_string(char *str);
+int		count_digits_numbers(int num);
+
 
 //---------------------------CLEAN---------------------------
 

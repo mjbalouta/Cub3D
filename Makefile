@@ -11,6 +11,7 @@ SRCS			= $(addprefix srcs/, \
 				parsing/parse_textures_info.c \
 				parsing/parse_colors_info.c \
 				parsing/utils.c \
+				parsing/utils2.c \
 				parsing/create_map.c \
 				parsing/parse_map.c \
 				clean/exit_functions.c \

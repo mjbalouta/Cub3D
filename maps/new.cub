@@ -4,9 +4,9 @@ NO ./textures/image.xpm
 
 F 0, 255,	0
 SO ./textures/image.xpm
-C 225,30,0
+C  225 ,30,0
 
-WE 		./textures/.xpm
+WE 		./textures/image.xpm
 EA ./textures/image.xpm
 
 
