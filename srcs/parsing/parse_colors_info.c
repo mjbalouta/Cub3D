@@ -111,15 +111,14 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 			" defined.", 1, game);
 	while (code_str[++i])
 	{
-		if (!ft_isdigit(code_str[i]) && code_str[i] != ',' && !is_whitespace(code_str[i])
+		if (!ft_isdigit(code_str[i]) && code_str[i] != ','
+			&& !is_whitespace(code_str[i])
 			&& code_str[i] != '+' && code_str[i] != '-')
-			print_exit_free("Invalid color code. Must be R,G,B"
-				" codes only.", 1, game);
+			print_exit_free(RGB_ERROR, 1, game);
 	}
 	color_codes = ft_split(code_str, ',');
 	if (!color_codes)
-		print_exit_free("Invalid color code. Must be R,G,B"
-			" format.", 1, game);
+		print_exit_free(RGB_ERROR, 1, game);
 	if (count_strings(color_codes) != 3)
 	{
 		free_arrays(color_codes);

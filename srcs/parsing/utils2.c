@@ -1,5 +1,11 @@
 #include "cub3d.h"
 
+/**
+ * @brief counts digits in a string
+ * 
+ * @param str 
+ * @return int 
+ */
 int	count_digits_string(char *str)
 {
 	int	i;
@@ -16,6 +22,12 @@ int	count_digits_string(char *str)
 	return (count_digits);
 }
 
+/**
+ * @brief counts digits in a number
+ * 
+ * @param num 
+ * @return int 
+ */
 int	count_digits_numbers(int num)
 {
 	int	nr_digits;

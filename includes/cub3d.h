@@ -1,5 +1,5 @@
-#ifndef PROTOTYPES_H
-# define PROTOTYPES_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "structs.h"
 # include "../minilibx-linux/mlx.h"
@@ -30,6 +30,7 @@ int		tracks_identified_info(t_game *game);
 int		is_whitespace(char a);
 int		count_digits_string(char *str);
 int		count_digits_numbers(int num);
+void	identify_direction(char *line, int i, t_game *game);
 
 
 //---------------------------CLEAN---------------------------

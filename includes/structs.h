@@ -1,16 +1,17 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 # include "../libft/get-next-line/get_next_line.h"
 # include "../libft/libft/libft.h"
 # include "../libft/printf/libftprintf.h"
 # include <errno.h>
 
-#define WALLS_ERROR "The map must be surrounded by walls (1)."
-#define ERROR_IDENTIFIER "Invalid identifier. " \
-"Expected definitions of NO, SO, WE, EA and F, C first and then the map."
-#define COLOR_FORMAT_ERROR "Invalid color code. " \
-"Must be between 0 and 255 only and without spaces in between numbers."
+# define WALLS_ERROR "The map must be surrounded by walls (1)."
+# define ERROR_IDENTIFIER "Invalid identifier.  \
+Expected definitions of NO, SO, WE, EA and F, C first and then the map."
+# define COLOR_FORMAT_ERROR "Invalid color code.  \
+Must be between 0 and 255 only and without spaces in between numbers."
+# define RGB_ERROR "Invalid color code. Must be R,G,B format."
 
 typedef struct s_player
 {

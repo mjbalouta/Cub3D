@@ -52,7 +52,6 @@ int	checks_walkable_chars(char tile)
  */
 void	check_walls(t_game *game)
 {
-	int		line_size;
 	int		i;
 	int		j;
 	char	**map;
@@ -61,20 +60,20 @@ void	check_walls(t_game *game)
 	map = game->map.map;
 	while (map[++i])
 	{
-		line_size = ft_strlen(map[i]) - 1;
 		j = -1;
 		while (map[i][++j] && map[i][j] != '\n')
 		{
-			if ((i == 0 || i == game->map.height - 1 || j == 0
-					|| j == line_size - 1) && checks_walkable_chars(map[i][j]) && !is_whitespace(map[i][j]))
-				print_exit_free(WALLS_ERROR, 1, game);
-			if (is_whitespace(map[i][j]) && i != game->map.height - 1
-				&& map[i + 1][j] != '1' && !is_whitespace(map[i + 1][j]))
-				print_exit_free(WALLS_ERROR, 1, game);
-			if (checks_walkable_chars(map[i][j]) && (is_whitespace(map[i - 1][j])
-				|| is_whitespace(map[i + 1][j]) || is_whitespace(map[i][j - 1])
-				|| is_whitespace(map[i][j + 1])))
-				print_exit_free(WALLS_ERROR, 1, game);
+			if (checks_walkable_chars(map[i][j]))
+			{
+				if (i == 0 || i == game->map.height - 1
+					|| j == 0 || j == ((int)ft_strlen(map[i]) - 2))
+					print_exit_free(WALLS_ERROR, 1, game);
+				else if (is_whitespace(map[i - 1][j])
+					|| is_whitespace(map[i + 1][j])
+					|| is_whitespace(map[i][j - 1])
+					|| is_whitespace(map[i][j + 1]))
+					print_exit_free (WALLS_ERROR, 1, game);
+			}
 		}
 	}
 }

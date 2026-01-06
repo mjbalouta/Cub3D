@@ -52,6 +52,7 @@ void	checks_identifier(char *line, t_game *game)
 	else
 		print_exit_free("Ivalid identifier.", 1, game);
 }
+
 /**
  * @brief this function opens the .cub file, reads it line by line and calls
  * parse_line() to verify each line

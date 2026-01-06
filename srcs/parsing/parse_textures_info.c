@@ -21,6 +21,38 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 }
 
 /**
+ * @brief identify which direction to redirect the definition
+ * 
+ * @param line 
+ * @param i 
+ * @param game 
+ */
+void	identify_direction(char *line, int i, t_game *game)
+{
+	if ((line[i] == 'N' && line[i + 1] == 'O'
+			&& is_whitespace(line[i + 2]))
+		|| (line[i] == 'N' && is_whitespace(line[i + 1])))
+		define_texture(0, game, line, i);
+	else if ((line[i] == 'S' && line[i + 1] == 'O'
+			&& is_whitespace(line[i + 2]))
+		|| (line[i] == 'S' && is_whitespace(line[i + 1])))
+		define_texture(1, game, line, i);
+	else if ((line[i] == 'W' && line[i + 1] == 'E'
+			&& is_whitespace(line[i + 2]))
+		|| (line[i] == 'W' && is_whitespace(line[i + 1])))
+		define_texture(2, game, line, i);
+	else if ((line[i] == 'E' && line[i + 1] == 'A'
+			&& is_whitespace(line[i + 2]))
+		|| (line[i] == 'E' && is_whitespace(line[i + 1])))
+		define_texture(3, game, line, i);
+	else
+	{
+		free(line);
+		print_exit_free(ERROR_IDENTIFIER, 1, game);
+	}
+}
+
+/**
  * @brief this function detects which direction is written in the line
  * 
  * @param line 
@@ -30,25 +62,7 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 void	parse_texture_line(char *line, t_game *game, int i)
 {
 	if (line[i] && line[i + 1] && line[i + 2])
-	{
-		if ((line[i] == 'N' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
-			|| (line[i] == 'N' && is_whitespace(line[i + 1])))
-			define_texture(0, game, line, i);
-		else if ((line[i] == 'S' && line[i + 1] == 'O' && is_whitespace(line[i + 2]))
-			|| (line[i] == 'S' && is_whitespace(line[i + 1])))
-			define_texture(1, game, line, i);
-		else if ((line[i] == 'W' && line[i + 1] == 'E' && is_whitespace(line[i + 2]))
-			|| (line[i] == 'W' && is_whitespace(line[i + 1])))
-			define_texture(2, game, line, i);
-		else if ((line[i] == 'E' && line[i + 1] == 'A' && is_whitespace(line[i + 2]))
-			|| (line[i] == 'E' && is_whitespace(line[i + 1])))
-			define_texture(3, game, line, i);
-		else
-		{
-			free(line);
-			print_exit_free(ERROR_IDENTIFIER, 1, game);
-		}
-	}
+		identify_direction(line, i, game);
 	else
 	{
 		free(line);
