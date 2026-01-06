@@ -1,0 +1,10 @@
+
+NO ./textures/NO-Wall.xpm
+SO ./textures/SO-Wall.xpm
+WE ./textures/WE-Wall.xpm
+EA ./textures/EA-Wall.xpm
+
+
+
+F 220,100,0
+C 225,30,0
