@@ -2,6 +2,8 @@ CC          	= cc
 NAME        	= cub3D
 INCLUDES_PATH	= includes
 INCLUDES		= -I$(INCLUDES_PATH)
+MLX_DIR 		= ./minilibx-linux
+MLX_LIB 		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CFLAGS      	= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INCLUDES) -I$(MLX_DIR) -g
 MLX_FLAGS		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 SRCS			= $(addprefix srcs/, \
@@ -34,18 +36,23 @@ $(LIBFT):
 %.o: %.c cub3d.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS) $(MLX_LIB)
 	@echo "Cub3D compiled."
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+
+$(MLX_LIB):
+	@$(MAKE) -C $(MLX_DIR)
 
 clean:
 	@echo "Removing objects..."
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) -C $(MLX_DIR) clean
 	@rm -f $(OBJS)
 
 fclean: clean
 	@echo "Removing executable..."
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) -C $(MLX_DIR) clean
 	@rm -f $(NAME)
 
 re: fclean all
