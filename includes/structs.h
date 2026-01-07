@@ -52,7 +52,6 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_window;
-	int			collected;
 	int			win_width;
 	int			win_height;
 	t_tex		texture[4]; //[0]NO, [1]SO, [2]WE, [3]EA
