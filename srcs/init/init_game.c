@@ -1,5 +1,24 @@
 #include "cub3d.h"
 
+void	init_img(t_game *game)
+{
+	game->screen.img = mlx_new_image(
+		game->mlx,
+		game->win_width,
+		game->win_height
+	);
+	if (!game->screen.img)
+		print_exit_free("Failed to create screen image", 1, game);
+	game->screen.addr = mlx_get_data_addr(
+		game->screen.img,
+		&game->screen.bpp,
+		&game->screen.line_len,
+		&game->screen.endian
+	);
+	if (!game->screen.addr)
+		print_exit_free("Failed to get screen image addr", 1, game);
+}
+
 void	init_color_struct(t_game *game)
 {
 	int	i;
@@ -43,14 +62,19 @@ void	init_game(t_game *game)
 	ft_bzero(game, sizeof(t_game));
 	game->win_width = 1024;
 	game->win_height = 768;
-	game->player.x = 1.5;
-	game->player.y = 1.5;
+	game->player.posx = 1.5;
+	game->player.posy = 1.5;
 	game->player.dir_x = -1.0;
 	game->player.dir_y = 0.0;
+	game->player.planex = 0;
+	game->player.planey = 0.66;
+	game->player.time = 0;
+	game->player.oldTime =
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.map = NULL;
 	init_texture_struct(game);
 	init_color_struct(game);
 	init_mlx(game);
+	init_img(game);
 }

@@ -106,6 +106,13 @@ void	check_players(t_game *game)
 		print_exit_free("You must have one player in your map.", 1, game);
 }
 
+void	find_and_set_player(t_game *game)
+{
+	int		i;
+	int		j;
+	char	**map;
+}
+
 /**
  * @brief calls the validation functions to verify the map
  * 
@@ -125,5 +132,6 @@ int	validate_map(t_game *game, int fd)
 	validate_chars(game);
 	check_players(game);
 	check_walls(game);
+	find_and_set_player(game);
 	return (0);
 }

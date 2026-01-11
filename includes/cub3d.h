@@ -52,6 +52,6 @@ void	load_textures(t_game *game);
 
 //------------------------RAYCASTING-------------------------.
 
-//void	start_ray(t_game *game);
+void	start_ray(t_game *game);
 
 #endif

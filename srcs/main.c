@@ -47,8 +47,9 @@ int	main(int ac, char **av)
 	init_game(&game);
 	validate_args(ac, av, &game);
 	validate_file(av[1], &game);
-	print_parsing(&game);
+	//print_parsing(&game);
 	load_textures(&game);
+	start_ray(&game);
 	mlx_key_hook(game.mlx_window, handle_keypress, &game);
 	mlx_hook(game.mlx_window, 17, 0, handle_close, &game);
 	mlx_loop(game.mlx);
