@@ -62,14 +62,6 @@ void	init_game(t_game *game)
 	ft_bzero(game, sizeof(t_game));
 	game->win_width = 1024;
 	game->win_height = 768;
-	game->player.posx = 1.5;
-	game->player.posy = 1.5;
-	game->player.dir_x = -1.0;
-	game->player.dir_y = 0.0;
-	game->player.planex = 0;
-	game->player.planey = 0.66;
-	game->player.time = 0;
-	game->player.oldTime =
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.map = NULL;

@@ -1,4 +1,6 @@
 #include "cub3d.h"
+
+#include "cub3d.h"
 #include <math.h>
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -42,11 +44,15 @@ void	calculate_texture_x(t_ray *ray, t_game *game, t_wall *wall)
 
 void	calculate_wall_height(t_ray *ray, t_game *game, t_wall *wall)
 {
+	int	horizon_offset;
+
+	horizon_offset = 150;  // ✅ Ajusta este valor (positivo = olhar para baixo)
+	
 	wall->line_height = (int)(game->win_height / ray->perp_wall_dist);
-	wall->draw_start = -wall->line_height / 2 + game->win_height / 2;
+	wall->draw_start = -wall->line_height / 2 + game->win_height / 2 + horizon_offset;
 	if (wall->draw_start < 0)
 		wall->draw_start = 0;
-	wall->draw_end = wall->line_height / 2 + game->win_height / 2;
+	wall->draw_end = wall->line_height / 2 + game->win_height / 2 + horizon_offset;
 	if (wall->draw_end >= game->win_height)
 		wall->draw_end = game->win_height - 1;
 }
@@ -86,20 +92,13 @@ void	draw_ceiling_floor(t_game *game, int x, t_wall *wall)
 {
 	int	y;
 
-	if (x == game->win_width / 2)
-	{
-		printf("Col %d: draw_start=%d, draw_end=%d, win_height=%d\n", 
-			x, wall->draw_start, wall->draw_end, game->win_height);
-		printf("Floor will draw from y=%d to y=%d\n", 
-			wall->draw_end + 1, game->win_height - 1);
-	}
 	y = 0;
 	while (y < wall->draw_start)
 	{
 		my_mlx_pixel_put(&game->screen, x, y, game->sky_color.color);
 		y++;
 	}
-	y = wall->draw_end + 1;
+	y = wall->draw_end;
 	while (y < game->win_height)
 	{
 		my_mlx_pixel_put(&game->screen, x, y, game->floor_color.color);
@@ -208,9 +207,8 @@ void	start_ray(t_game *game)
 {
 	int	x;
 
-	printf("Floor color: %d...\n", game->floor_color.color);
-	finalize_colors(game);
 	x = 0;
+	finalize_colors(game);
 	while (x < game->win_width)
 	{
 		cast_ray(game, x, &game->ray);
