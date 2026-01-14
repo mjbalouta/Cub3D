@@ -1,25 +1,14 @@
 #include "cub3d.h"
-#include <math.h>
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || y < 0)
-		return ;
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
 
 int	get_texture_index(t_ray *ray)
 {
 	if (ray->side == 0 && ray->ray_dir_x > 0)
-		return (3);
-	if (ray->side == 0 && ray->ray_dir_x < 0)
 		return (2);
+	if (ray->side == 0 && ray->ray_dir_x < 0)
+		return (3);
 	if (ray->side == 1 && ray->ray_dir_y > 0)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 void	calculate_texture_x(t_ray *ray, t_game *game, t_wall *wall)
@@ -86,20 +75,14 @@ void	draw_ceiling_floor(t_game *game, int x, t_wall *wall)
 {
 	int	y;
 
-	if (x == game->win_width / 2)
-	{
-		printf("Col %d: draw_start=%d, draw_end=%d, win_height=%d\n", 
-			x, wall->draw_start, wall->draw_end, game->win_height);
-		printf("Floor will draw from y=%d to y=%d\n", 
-			wall->draw_end + 1, game->win_height - 1);
-	}
+
 	y = 0;
 	while (y < wall->draw_start)
 	{
 		my_mlx_pixel_put(&game->screen, x, y, game->sky_color.color);
 		y++;
 	}
-	y = wall->draw_end + 1;
+	y = wall->draw_end;
 	while (y < game->win_height)
 	{
 		my_mlx_pixel_put(&game->screen, x, y, game->floor_color.color);
@@ -116,7 +99,13 @@ void	draw_column(t_game *game, int x, t_ray *ray)
 	draw_ceiling_floor(game, x, &wall);
 	draw_wall_column(game, x, ray, &wall);
 }
-
+/**
+ * @brief Here we will initialize all the necessary variables for the raycasting
+ * 
+ * @param game our struct
+ * @param x which position of the x position in our map we are
+ * @param ray our ray struct
+ */
 void	calculate_ray_direction(t_game *game, int x, t_ray *ray)
 {
 	ray->camera_x = 2 * x / (double)game->win_width - 1;
@@ -128,6 +117,12 @@ void	calculate_ray_direction(t_game *game, int x, t_ray *ray)
 	ray->delta_dist_y = fabs(1/ ray->ray_dir_y);
 }
 
+/**
+ * @brief Decides what's the ray's direction
+ * 
+ * @param game 
+ * @param ray 
+ */
 void	calculate_step_and_side_dist(t_game *game, t_ray *ray)
 {
 	if (ray->ray_dir_x < 0)
@@ -151,7 +146,12 @@ void	calculate_step_and_side_dist(t_game *game, t_ray *ray)
 		ray->side_dist_y = (ray->map_y + 1.0 - game->player.posy) * ray->delta_dist_y;
 	}
 }
-
+/**
+ * @brief 
+ * 
+ * @param game 
+ * @param ray 
+ */
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
@@ -172,7 +172,7 @@ void	perform_dda(t_game *game, t_ray *ray)
 			ray->side = 1; 
 		}
 		if (ray->map_x < 0 || ray->map_x >= game->map.width || ray->map_y < 0 || ray->map_y >= game->map.height)
-			hit = 1;
+			continue ;
 		else if (game->map.map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
@@ -208,7 +208,6 @@ void	start_ray(t_game *game)
 {
 	int	x;
 
-	printf("Floor color: %d...\n", game->floor_color.color);
 	finalize_colors(game);
 	x = 0;
 	while (x < game->win_width)

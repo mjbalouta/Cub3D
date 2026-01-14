@@ -5,6 +5,7 @@
 # include "../libft/libft/libft.h"
 # include "../libft/printf/libftprintf.h"
 # include <errno.h>
+# include <math.h>
 
 # define WALLS_ERROR "The map must be surrounded by walls (1)."
 # define ERROR_IDENTIFIER "Invalid identifier.  \
