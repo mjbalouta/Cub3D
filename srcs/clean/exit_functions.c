@@ -24,3 +24,9 @@ void	print_exit_free(char *message, int exit_code, t_game *game)
 	free_mem(game);
 	print_message_exit(message, exit_code);
 }
+
+int	handle_close(t_game *game)
+{
+	mlx_loop_end(game->mlx);
+	return (0);
+}
