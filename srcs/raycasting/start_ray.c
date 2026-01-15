@@ -10,6 +10,24 @@ void	draw_column(t_game *game, int x, t_ray *ray)
 	draw_wall_column(game, x, ray, &wall);
 }
 
+/**
+ * @brief Here we will initialize all the necessary variables for the raycasting
+ * 
+ * @param game our struct
+ * @param x which position of the x position in our map we are
+ * @param ray our ray struct
+ */
+void	calculate_ray_direction(t_game *game, int x, t_ray *ray)
+{
+	ray->camera_x = 2 * x / (double)game->win_width - 1;
+	ray->ray_dir_x = game->player.dir_x + game->player.planex * ray->camera_x;
+	ray->ray_dir_y = game->player.dir_y + game->player.planey * ray->camera_x;
+	ray->map_x = (int)game->player.posx;
+	ray->map_y = (int)game->player.posy;
+	ray->delta_dist_x = fabs(1/ ray->ray_dir_x);
+	ray->delta_dist_y = fabs(1/ ray->ray_dir_y);
+}
+
 void	cast_ray(t_game *game, int x, t_ray *ray)
 {
 	calculate_ray_direction(game, x, ray);

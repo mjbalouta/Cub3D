@@ -24,6 +24,8 @@ SRCS			= $(addprefix srcs/, \
 				clean/free_utils.c \
 				raycasting/start_ray.c\
 				raycasting/draw_walls.c\
+				raycasting/calculate_texture.c\
+				raycasting/start_algorithm.c\
 				game/set_player.c\
 )
 OBJS       		= $(SRCS:.c=.o)

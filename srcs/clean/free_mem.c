@@ -1,5 +1,18 @@
 #include "cub3d.h"
 
+void	free_images(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (game->texture[i].img)
+			mlx_destroy_image(game->mlx, game->texture[i].img);
+		i++;
+	}
+}
+
 void	free_textures(t_game *game)
 {
 	int	i;
@@ -9,8 +22,6 @@ void	free_textures(t_game *game)
 	{
 		if (game->texture[i].path)
 			free(game->texture[i].path);
-		if (game->texture[i].img)
-			mlx_destroy_image(game->mlx, game->texture[i].img);
 		i++;
 	}
 }
@@ -36,6 +47,7 @@ void	free_mem(t_game *game)
 	int	i;
 
 	free_textures(game);
+	free_images(game);
 	if (game->floor_color.code)
 		free(game->floor_color.code);
 	if (game->sky_color.code)
