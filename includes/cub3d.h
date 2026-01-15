@@ -50,10 +50,17 @@ int		handle_keypress(int keycode, t_game *game);
 int		handle_close(t_game *game);
 void	load_textures(t_game *game);
 
-//------------------------RAYCASTING-------------------------.
+//------------------------RAYCASTING--------------------------
 
 void	start_ray(t_game *game);
 void	finalize_colors(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+//-------------------------GAME-------------------------------
+
+void	find_and_set_player(t_game *game);
+void	set_player_direction(t_game *game, char orientation);
+void	set_weast_east(t_game *game, char orientation);
+void	set_north_south(t_game *game, char orientation);
 
 #endif
