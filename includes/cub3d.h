@@ -79,6 +79,7 @@ void	set_north_south(t_game *game, char orientation);
 int		handle_keypress(int keycode, t_game *game);
 void	init_img(t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
+void	move_player(t_game *game);
 
 
 #endif

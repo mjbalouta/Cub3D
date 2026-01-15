@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 	init_mlx(&game);
 	init_img(&game);
 	load_textures(&game);
-	start_ray(&game);
+	// start_ray(&game);
 	mlx_loop_hook(game.mlx, &render, &game);
 	mlx_hook(game.mlx_window, KeyPress, KeyPressMask, handle_keypress, &game);
 	mlx_hook(game.mlx_window,KeyRelease, KeyRelease, handle_keyrelease, &game);
