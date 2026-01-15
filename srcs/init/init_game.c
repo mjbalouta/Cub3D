@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+int	render(t_game *game)
+{
+	//chamar aqui a funcao dos movimentos
+	start_ray(game);
+	return (0);
+}
+
 void	init_img(t_game *game)
 {
 	game->screen.img = mlx_new_image(
@@ -67,6 +74,4 @@ void	init_game(t_game *game)
 	game->map.map = NULL;
 	init_texture_struct(game);
 	init_color_struct(game);
-	init_mlx(game);
-	init_img(game);
 }

@@ -13,6 +13,7 @@ Expected definitions of NO, SO, WE, EA and F, C first and then the map."
 # define COLOR_FORMAT_ERROR "Invalid color code.  \
 Must be between 0 and 255 only and without spaces in between numbers."
 # define RGB_ERROR "Invalid color code. Must be R,G,B format."
+# define SPEED 0.1
 
 typedef struct s_player
 {
@@ -23,6 +24,12 @@ typedef struct s_player
 	double	posy; //player's vertical position in world
 	double	planex; //horizontal vision size
 	double	planey; //vertical vision size
+	int		move_up;
+	int		move_down;
+	int		move_left;
+	int		move_right;
+	int		rotate_left;
+	int		rotate_right;
 	double	time;
 	double	oldTime;
 }	t_player;

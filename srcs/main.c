@@ -48,9 +48,13 @@ int	main(int ac, char **av)
 	validate_args(ac, av, &game);
 	validate_file(av[1], &game);
 	//print_parsing(&game);
+	init_mlx(&game);
+	init_img(&game);
 	load_textures(&game);
 	start_ray(&game);
-	mlx_key_hook(game.mlx_window, handle_keypress, &game);
+	mlx_loop_hook(game.mlx, &render, &game);
+	mlx_hook(game.mlx_window, KeyPress, KeyPressMask, handle_keypress, &game);
+	mlx_hook(game.mlx_window,KeyRelease, KeyRelease, handle_keyrelease, &game);
 	mlx_hook(game.mlx_window, 17, 0, &handle_close, &game);
 	mlx_loop(game.mlx);
 	free_mem(&game);

@@ -3,6 +3,8 @@
 
 # include "structs.h"
 # include "../minilibx-linux/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 //--------------------------PARSING--------------------------
 
@@ -49,6 +51,7 @@ void	init_mlx(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 int		handle_close(t_game *game);
 void	load_textures(t_game *game);
+int		render(t_game *game);
 
 //------------------------RAYCASTING--------------------------
 
@@ -73,5 +76,9 @@ void	find_and_set_player(t_game *game);
 void	set_player_direction(t_game *game, char orientation);
 void	set_weast_east(t_game *game, char orientation);
 void	set_north_south(t_game *game, char orientation);
+int		handle_keypress(int keycode, t_game *game);
+void	init_img(t_game *game);
+int		handle_keyrelease(int keycode, t_game *game);
+
 
 #endif
