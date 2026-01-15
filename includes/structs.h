@@ -96,6 +96,7 @@ typedef struct s_game
 	void		*mlx_window;
 	int			win_width;
 	int			win_height;
+	double		tex_pos;
 	t_tex		texture[4]; //[0]NO, [1]SO, [2]WE, [3]EA
 	t_player	player;
 	t_map		map;

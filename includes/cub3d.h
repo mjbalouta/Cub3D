@@ -55,6 +55,17 @@ void	load_textures(t_game *game);
 void	start_ray(t_game *game);
 void	finalize_colors(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	cast_ray(t_game *game, int x, t_ray *ray);
+void	draw_column(t_game *game, int x, t_ray *ray);
+void	calculate_wall_distance(t_ray *ray);
+void	perform_dda(t_game *game, t_ray *ray);
+void	calculate_step_and_side_dist(t_game *game, t_ray *ray);
+void	draw_ceiling_floor(t_game *game, int x, t_wall *wall);
+void	draw_wall_column(t_game *game, int x, t_ray *ray, t_wall *wall);
+int		get_texture_color(t_tex *texture, int x, int y);
+void	calculate_wall_height(t_ray *ray, t_game *game, t_wall *wall);
+void	calculate_texture_x(t_ray *ray, t_game *game, t_wall *wall);
+int		get_texture_index(t_ray *ray);
 
 //-------------------------GAME-------------------------------
 
