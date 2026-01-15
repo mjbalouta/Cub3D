@@ -24,6 +24,7 @@ SRCS			= $(addprefix srcs/, \
 				clean/free_utils.c \
 				raycasting/start_ray.c\
 				raycasting/draw_walls.c\
+				game/set_player.c\
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft

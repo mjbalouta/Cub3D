@@ -3,18 +3,18 @@
 void	init_img(t_game *game)
 {
 	game->screen.img = mlx_new_image(
-		game->mlx,
-		game->win_width,
-		game->win_height
-	);
+			game->mlx,
+			game->win_width,
+			game->win_height
+			);
 	if (!game->screen.img)
 		print_exit_free("Failed to create screen image", 1, game);
 	game->screen.addr = mlx_get_data_addr(
-		game->screen.img,
-		&game->screen.bpp,
-		&game->screen.line_len,
-		&game->screen.endian
-	);
+			game->screen.img,
+			&game->screen.bpp,
+			&game->screen.line_len,
+			&game->screen.endian
+			);
 	if (!game->screen.addr)
 		print_exit_free("Failed to get screen image addr", 1, game);
 }
