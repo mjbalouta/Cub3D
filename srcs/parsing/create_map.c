@@ -68,9 +68,12 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 
 	temp = *map_list;
 	i = 0;
-	allocate_map_mem(game, size, map_list);
 	while (ft_strncmp(temp->line, "\n", 1) == 0)
+	{
 		temp = temp->next;
+		size--;
+	}
+	allocate_map_mem(game, size, map_list);
 	while (temp)
 	{
 		game->map.map[i] = ft_strdup(temp->line);

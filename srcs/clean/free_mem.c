@@ -1,25 +1,6 @@
 #include "cub3d.h"
 
-void	free_list(t_map_file **map_list)
-{
-	t_map_file	*next;
-	t_map_file	*current;
-
-	if (!map_list || !*map_list)
-		return ;
-	current = *map_list;
-	while (current)
-	{
-		next = current->next;
-		if (current->line)
-			free(current->line);
-		free(current);
-		current = next;
-	}
-	*map_list = NULL;
-}
-
-void	free_mem(t_game *game)
+void	free_textures(t_game *game)
 {
 	int	i;
 
@@ -28,8 +9,33 @@ void	free_mem(t_game *game)
 	{
 		if (game->texture[i].path)
 			free(game->texture[i].path);
+		if (game->texture[i].img)
+			mlx_destroy_image(game->mlx, game->texture[i].img);
 		i++;
 	}
+}
+
+void	free_window(t_game *game)
+{
+	if (game->mlx_window)
+	{
+		mlx_clear_window(game->mlx, game->mlx_window);
+		mlx_destroy_window(game->mlx, game->mlx_window);
+	}
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	if (game->screen.img)
+		free(game->screen.img);
+}
+
+void	free_mem(t_game *game)
+{
+	int	i;
+
+	free_textures(game);
 	if (game->floor_color.code)
 		free(game->floor_color.code);
 	if (game->sky_color.code)
@@ -43,5 +49,6 @@ void	free_mem(t_game *game)
 	}
 	if (game->map.map)
 		free(game->map.map);
+	free_window(game);
 	get_next_line(-1);
 }

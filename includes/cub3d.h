@@ -54,5 +54,6 @@ void	load_textures(t_game *game);
 
 void	start_ray(t_game *game);
 void	finalize_colors(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

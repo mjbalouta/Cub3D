@@ -21,7 +21,9 @@ SRCS			= $(addprefix srcs/, \
 				parsing/parse_map.c \
 				clean/exit_functions.c \
 				clean/free_mem.c \
+				clean/free_utils.c \
 				raycasting/start_ray.c\
+				raycasting/draw_walls.c\
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft

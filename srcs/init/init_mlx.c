@@ -9,10 +9,11 @@ void	init_mlx(t_game *game)
 
 int	handle_close(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->mlx_window);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	exit(0);
+	mlx_loop_end(game->mlx);
+	// mlx_destroy_window(game->mlx, game->mlx_window);
+	// mlx_destroy_display(game->mlx);
+	// free(game->mlx);
+	// exit(0);
 	return (0);
 }
 
