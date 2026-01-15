@@ -17,6 +17,8 @@ void	free_textures(t_game *game)
 
 void	free_window(t_game *game)
 {
+	if (game->screen.img)
+		mlx_destroy_image(game->mlx, game->screen.img);
 	if (game->mlx_window)
 	{
 		mlx_clear_window(game->mlx, game->mlx_window);
@@ -27,8 +29,6 @@ void	free_window(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	if (game->screen.img)
-		free(game->screen.img);
 }
 
 void	free_mem(t_game *game)
