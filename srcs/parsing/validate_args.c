@@ -30,6 +30,5 @@ int	validate_filename(char *str)
 void	validate_args(int ac, char **av, t_game *game)
 {
 	if (ac != 2 || validate_filename(av[1]) != 0)
-		print_exit_free("The program must be run with a"
-			" something.cub file.", 1, game);
+		print_exit_free(ARGS_ERROR, 1, game);
 }

@@ -17,7 +17,7 @@ void	init_img(t_game *game)
 			game->win_height
 			);
 	if (!game->screen.img)
-		print_exit_free("Failed to create screen image", 1, game);
+		print_exit_free(CREATE_SCREEN_ERROR, 1, game);
 	game->screen.addr = mlx_get_data_addr(
 			game->screen.img,
 			&game->screen.bpp,
@@ -25,7 +25,7 @@ void	init_img(t_game *game)
 			&game->screen.endian
 			);
 	if (!game->screen.addr)
-		print_exit_free("Failed to get screen image addr", 1, game);
+		print_exit_free(GET_SCREEN_ERROR, 1, game);
 }
 
 void	init_color_struct(t_game *game)

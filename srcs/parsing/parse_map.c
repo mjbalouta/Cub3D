@@ -102,9 +102,9 @@ void	check_players(t_game *game)
 		i++;
 	}
 	if (players > 1)
-		print_exit_free("You can only have one player in your map.", 1, game);
+		print_exit_free(TOO_MANY_PLAYERS_ERROR, 1, game);
 	else if (players < 1)
-		print_exit_free("You must have one player in your map.", 1, game);
+		print_exit_free(NO_PLAYER_ERROR, 1, game);
 }
 
 /**

@@ -2,9 +2,15 @@
 # define CUB3D_H
 
 # include "structs.h"
+# include "macros.h"
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include "../libft/get-next-line/get_next_line.h"
+# include "../libft/libft/libft.h"
+# include "../libft/printf/libftprintf.h"
+# include <errno.h>
+# include <math.h>
 
 //--------------------------PARSING--------------------------
 

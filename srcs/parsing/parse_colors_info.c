@@ -15,8 +15,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 		if (game->floor_color.defined == 1)
 		{
 			free(line);
-			print_exit_free("Duplicated definition of a"
-				" color.", 1, game);
+			print_exit_free(DUPLICATED_COLOR_ERROR, 1, game);
 		}
 		game->floor_color.defined = 1;
 		while (line[i] && is_whitespace(line[i]))
@@ -28,8 +27,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 		if (game->sky_color.defined == 1)
 		{
 			free(line);
-			print_exit_free("Duplicated definition of a"
-				" color.", 1, game);
+			print_exit_free(DUPLICATED_COLOR_ERROR, 1, game);
 		}
 		game->sky_color.defined = 1;
 		while (line[i] && is_whitespace(line[i]))
@@ -113,8 +111,7 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 
 	i = -1;
 	if (game->floor_color.defined != 1 || game->sky_color.defined != 1)
-		print_exit_free("Colors for floor and ceiling must be"
-			" defined.", 1, game);
+		print_exit_free(MISSING_COLOR_ERROR, 1, game);
 	while (code_str[++i])
 	{
 		if (!ft_isdigit(code_str[i]) && code_str[i] != ','
@@ -128,7 +125,7 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 	if (count_strings(color_codes) != 3)
 	{
 		free_arrays(color_codes);
-		print_exit_free("Invalid color code.", 1, game);
+		print_exit_free(INVALID_COLOR, 1, game);
 	}
 	verify_numbers(color_codes, game, option);
 	free_arrays(color_codes);

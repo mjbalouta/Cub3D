@@ -17,7 +17,7 @@ void	create_linked_list(t_game *game, t_map_file **map_list, int fd)
 	head = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		print_exit_free("Nonexisting map.", 1, game);
+		print_exit_free(NO_MAP_ERROR, 1, game);
 	while (line != NULL)
 	{
 		if (!head)
@@ -50,9 +50,10 @@ void	allocate_map_mem(t_game *game, int size, t_map_file **map_list)
 	if (!game->map.map)
 	{
 		free_list(map_list);
-		print_exit_free("Error allocating memory for the map.", 1, game);
+		print_exit_free(MAP_MEM_ERROR, 1, game);
 	}
 }
+
 /**
  * @brief skips newlines that exist before the map
  * and if there are no lines with content after the newlines
@@ -64,7 +65,7 @@ void	allocate_map_mem(t_game *game, int size, t_map_file **map_list)
  * @param game 
  * @return int 
  */
-int	skip_newline(t_map_file **temp, t_map_file **map_list, int size, t_game *game)
+int	skip_newline(t_map_file **temp, t_map_file **map, int size, t_game *game)
 {
 	while (ft_strncmp((*temp)->line, "\n", 1) == 0)
 	{
@@ -72,8 +73,8 @@ int	skip_newline(t_map_file **temp, t_map_file **map_list, int size, t_game *gam
 			(*temp) = (*temp)->next;
 		else
 		{
-			free_list(map_list);
-			print_exit_free("Nonexisting map.", 1, game);
+			free_list(map);
+			print_exit_free(NO_MAP_ERROR, 1, game);
 		}
 		size--;
 	}
@@ -102,8 +103,7 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 		if (!game->map.map[i++])
 		{
 			free_list(map_list);
-			print_exit_free("Error allocating memory for the map.",
-				1, game);
+			print_exit_free(MAP_MEM_ERROR, 1, game);
 		}
 		if ((int)ft_strlen(temp->line) > game->map.width)
 			game->map.width = ft_strlen(temp->line);

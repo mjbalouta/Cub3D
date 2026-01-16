@@ -13,7 +13,7 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 	if (game->texture[direction].defined == 1)
 	{
 		free(line);
-		print_exit_free("Duplicated definition of a texture.", 1, game);
+		print_exit_free(DUPLICATED_TEX_ERROR, 1, game);
 	}
 	game->texture[direction].defined = 1;
 	while (line[i] && !is_whitespace(line[i]))
@@ -86,12 +86,12 @@ void	check_path_name(char *path, t_game *game)
 	file = ft_strrchr(path, '/');
 	file++;
 	if (ft_strlen(file) <= 4)
-		print_exit_free("Invalid path. Must be something.xpm.", 1, game);
+		print_exit_free(XPM_ERROR, 1, game);
 	extension = ft_strrchr(path, '.');
 	if (!extension)
-		print_exit_free("Invalid path in .cub file.", 1, game);
+		print_exit_free(XPM_ERROR, 1, game);
 	if (ft_strncmp(extension, ".xpm", 5) != 0)
-		print_exit_free("Textures must be .xpm.", 1, game);
+		print_exit_free(XPM_ERROR, 1, game);
 }
 
 /**
@@ -111,20 +111,20 @@ void	verify_defined_textures(t_game *game)
 	while (++i < 4)
 	{
 		if (game->texture[i].defined != 1)
-			print_exit_free("Not enough textures defined.", 1, game);
+			print_exit_free(NO_TEXTURE_ERROR, 1, game);
 		if (!game->texture[i].path
 			|| ft_strncmp(game->texture[i].path, "", 1) == 0)
-			print_exit_free("Missing texture's path.", 1, game);
+			print_exit_free(TEX_PATH_ERROR, 1, game);
 		check_path_name(game->texture[i].path, game);
 		fd = open(game->texture[i].path, __O_DIRECTORY);
 		if (fd >= 0)
 		{
 			close(fd);
-			print_exit_free("Texture path is a directory.", 1, game);
+			print_exit_free(TEX_DIRECTORY_ERROR, 1, game);
 		}
 		fd = open(game->texture[i].path, O_RDONLY);
 		if (fd < 0)
-			print_exit_free("Unable to open a texture's path.", 1, game);
+			print_exit_free(OPEN_PATH_ERROR, 1, game);
 		close(fd);
 	}
 }
