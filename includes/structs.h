@@ -14,6 +14,8 @@ Expected definitions of NO, SO, WE, EA and F, C first and then the map."
 Must be between 0 and 255 only and without spaces in between numbers."
 # define RGB_ERROR "Invalid color code. Must be R,G,B format."
 # define SPEED 0.01
+# define ROTATE_SPEED 0.01
+# define BOUNDARY 10
 
 typedef struct s_player
 {
