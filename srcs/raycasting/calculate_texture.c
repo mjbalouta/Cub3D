@@ -23,9 +23,9 @@ void	calculate_texture_x(t_ray *ray, t_game *game, t_wall *wall)
 		wall_x = game->player.posx + ray->perp_wall_dist * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
 	wall->tex_x = (int)(wall_x * (double)game->texture[tex_index].width);
-	if (ray->side == 0 && ray->ray_dir_x > 0)
+	if (ray->side == 0 && ray->ray_dir_x < 0)
 		wall->tex_x = game->texture[tex_index].width - wall->tex_x - 1;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == 1 && ray->ray_dir_y > 0)
 		wall->tex_x = game->texture[tex_index].width - wall->tex_x - 1;
 }
 
