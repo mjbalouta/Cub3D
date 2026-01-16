@@ -4,7 +4,8 @@ int	render(t_game *game)
 {
 	move_player(game);
 	start_ray(game);
-	mlx_put_image_to_window(game->mlx, game->mlx_window, game->screen.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_window,
+		game->screen.img, 0, 0);
 	return (0);
 }
 

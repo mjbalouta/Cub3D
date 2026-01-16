@@ -28,6 +28,8 @@ SRCS			= $(addprefix srcs/, \
 				raycasting/start_algorithm.c\
 				game/set_player.c\
 				game/movements.c\
+				game/rotate.c\
+				game/moves.c\
 )
 OBJS       		= $(SRCS:.c=.o)
 LIBFT_DIR   	= ./libft

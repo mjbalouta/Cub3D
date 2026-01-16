@@ -80,6 +80,10 @@ int		handle_keypress(int keycode, t_game *game);
 void	init_img(t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
 void	move_player(t_game *game);
-
+void	rotate(t_game *game, double angle);
+void	move_up(t_game *game, double new_y, double new_x);
+void	move_down(t_game *game, double new_y, double new_x);
+void	move_right(t_game *game, double new_y, double new_x);
+void	move_left(t_game *game, double new_y, double new_x);
 
 #endif

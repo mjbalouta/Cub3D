@@ -24,8 +24,8 @@ void	calculate_ray_direction(t_game *game, int x, t_ray *ray)
 	ray->ray_dir_y = game->player.dir_y + game->player.planey * ray->camera_x;
 	ray->map_x = (int)game->player.posx;
 	ray->map_y = (int)game->player.posy;
-	ray->delta_dist_x = fabs(1/ ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1/ ray->ray_dir_y);
+	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
 void	cast_ray(t_game *game, int x, t_ray *ray)
