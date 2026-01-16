@@ -53,6 +53,32 @@ void	allocate_map_mem(t_game *game, int size, t_map_file **map_list)
 		print_exit_free("Error allocating memory for the map.", 1, game);
 	}
 }
+/**
+ * @brief skips newlines that exist before the map
+ * and if there are no lines with content after the newlines
+ * it returns the error nonexisting map
+ * 
+ * @param temp 
+ * @param map_list 
+ * @param size 
+ * @param game 
+ * @return int 
+ */
+int	skip_newline(t_map_file **temp, t_map_file **map_list, int size, t_game *game)
+{
+	while (ft_strncmp((*temp)->line, "\n", 1) == 0)
+	{
+		if ((*temp)->next)
+			(*temp) = (*temp)->next;
+		else
+		{
+			free_list(map_list);
+			print_exit_free("Nonexisting map.", 1, game);
+		}
+		size--;
+	}
+	return (size);
+}
 
 /**
  * @brief creates a copy of the map's linked list to a char**
@@ -68,11 +94,7 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 
 	temp = *map_list;
 	i = 0;
-	while (ft_strncmp(temp->line, "\n", 1) == 0)
-	{
-		temp = temp->next;
-		size--;
-	}
+	skip_newline(&temp, map_list, size, game);
 	allocate_map_mem(game, size, map_list);
 	while (temp)
 	{

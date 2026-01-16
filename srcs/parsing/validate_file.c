@@ -47,10 +47,16 @@ void	checks_identifier(char *line, t_game *game)
 	else if (line[i] == 'F' || line[i] == 'C')
 		parse_color_line(line, game, i);
 	else if (line[i] == '1' && tracks_identified_info(game) == 1)
+	{
+		free(line);
 		print_exit_free("Missing identifier. Expected definitions of NO, SO,"
 			" WE, EA and F, C first and then the map.", 1, game);
+	}
 	else
+	{
+		free(line);
 		print_exit_free("Ivalid identifier.", 1, game);
+	}
 }
 
 /**

@@ -13,8 +13,11 @@ void	define_colors(t_game *game, int i, char *line, int place)
 	if (place == 1)
 	{
 		if (game->floor_color.defined == 1)
+		{
+			free(line);
 			print_exit_free("Duplicated definition of a"
 				" color.", 1, game);
+		}
 		game->floor_color.defined = 1;
 		while (line[i] && is_whitespace(line[i]))
 			i++;
@@ -23,8 +26,11 @@ void	define_colors(t_game *game, int i, char *line, int place)
 	else if (place == 2)
 	{
 		if (game->sky_color.defined == 1)
+		{
+			free(line);
 			print_exit_free("Duplicated definition of a"
 				" color.", 1, game);
+		}
 		game->sky_color.defined = 1;
 		while (line[i] && is_whitespace(line[i]))
 			i++;

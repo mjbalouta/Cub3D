@@ -10,24 +10,25 @@ void	validate_chars(t_game *game)
 	int		i;
 	int		j;
 	char	**map;
+	int		newline;
 
 	map = game->map.map;
 	i = -1;
+	newline = 0;
 	while (map[++i])
 	{
 		j = 0;
 		if (map[i][j] == '\n')
-			print_exit_free("The map can't contain an empty"
-				" line in the middle.", 1, game);
+			newline = 1;
 		while (map[i][j] && map[i][j] != '\n')
 		{
-			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N' ||
-				map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W' ||
-				is_whitespace(map[i][j]))
+			if (newline == 1)
+				print_exit_free(EMPTY_LINE_ERROR, 1, game);
+			if ((checks_walkable_chars(map[i][j]) || map[i][j] == '1' ||
+				is_whitespace(map[i][j])) && newline != 1)
 				j++;
 			else
-				print_exit_free("The map contains invalid characters."
-					" Only 0, 1, N, S, E, W are valid.", 1, game);
+				print_exit_free(CHARS_ERROR, 1, game);
 		}
 	}
 }

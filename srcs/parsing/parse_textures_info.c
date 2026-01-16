@@ -11,7 +11,10 @@
 void	define_texture(int direction, t_game *game, char *line, int i)
 {
 	if (game->texture[direction].defined == 1)
+	{
+		free(line);
 		print_exit_free("Duplicated definition of a texture.", 1, game);
+	}
 	game->texture[direction].defined = 1;
 	while (line[i] && !is_whitespace(line[i]))
 		i++;

@@ -13,6 +13,11 @@ Expected definitions of NO, SO, WE, EA and F, C first and then the map."
 # define COLOR_FORMAT_ERROR "Invalid color code.  \
 Must be between 0 and 255 only and without spaces in between numbers."
 # define RGB_ERROR "Invalid color code. Must be R,G,B format."
+# define CHARS_ERROR "The map contains invalid characters. \
+Only 0, 1, N, S, E, W are valid."
+# define EMPTY_LINE_ERROR "The map can't contain an empty \
+line in the middle."
+
 # define SPEED 0.01
 # define ROTATE_SPEED 0.01
 # define BOUNDARY 10

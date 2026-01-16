@@ -33,6 +33,7 @@ int		is_whitespace(char a);
 int		count_digits_string(char *str);
 int		count_digits_numbers(int num);
 void	identify_direction(char *line, int i, t_game *game);
+int		checks_walkable_chars(char tile);
 
 
 //---------------------------CLEAN---------------------------
