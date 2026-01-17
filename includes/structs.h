@@ -16,8 +16,6 @@ typedef struct s_player
 	int		move_right;
 	int		rotate_left;
 	int		rotate_right;
-	double	time;
-	double	oldTime;
 }	t_player;
 
 typedef	struct s_img

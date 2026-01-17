@@ -1,10 +1,16 @@
 #include "cub3d.h"
 
 /**
- * @brief Decides what's the ray's direction
+ * @brief Determines the direction of ray movement in the grid
  * 
- * @param game 
- * @param ray 
+ * @param game struct with player position
+ * @param ray struct to store step and side_dist
+ * 
+ * For each axis (X and Y):
+ * - Determine if ray goes positive (+1) or negative (-1)
+ * - Calculate distance to next grid line
+ * 
+ * side_dist: distance from player to next gridline
  */
 void	calculate_step_and_side_dist(t_game *game, t_ray *ray)
 {
@@ -33,10 +39,17 @@ void	calculate_step_and_side_dist(t_game *game, t_ray *ray)
 }
 
 /**
- * @brief 
+ * @brief DDA (Digital Differential Analyzer) algorithm for raycasting
  * 
- * @param game 
- * @param ray 
+ * @param game struct with the map
+ * @param ray struct being traced
+ * 
+ * Process:
+ * 1. Advance ray cell by cell in the grid
+ * 2. Always move in nearest direction (smallest side_dist)
+ * 3. Stop when finding a wall ('1') or going out of bounds
+ * 
+ * side: indicates if hit vertical wall (0) or horizontal wall (1)
  */
 void	perform_dda(t_game *game, t_ray *ray)
 {
@@ -65,6 +78,16 @@ void	perform_dda(t_game *game, t_ray *ray)
 	}
 }
 
+/**
+ * @brief Calculates perpendicular distance from player to wall
+ * 
+ * @param ray struct
+ * 
+ * Uses perpendicular distance (not euclidean) to avoid "fish-eye" effect
+ * Perpendicular distance is distance projected in player's looking direction
+ * 
+ * Subtract delta_dist because side_dist already advanced one extra cell
+ */
 void	calculate_wall_distance(t_ray *ray)
 {
 	if (ray->side == 0)

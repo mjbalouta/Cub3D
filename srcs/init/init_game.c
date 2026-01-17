@@ -69,8 +69,8 @@ void	init_texture_struct(t_game *game)
 void	init_game(t_game *game)
 {
 	ft_bzero(game, sizeof(t_game));
-	game->win_width = 1024;
-	game->win_height = 768;
+	game->win_width = 1920;
+	game->win_height = 1080;
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.map = NULL;

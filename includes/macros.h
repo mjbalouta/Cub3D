@@ -39,8 +39,8 @@ WE, EA and F, C first and then the map."
 # define GET_SCREEN_ERROR "Failed to get screen image addr"
 # define LOAD_TEX_ERROR "Failed to load texture"
 
-# define SPEED 0.01
-# define ROTATE_SPEED 0.01
+# define SPEED 0.06
+# define ROTATE_SPEED 0.04
 # define BOUNDARY 10
 
 #endif
