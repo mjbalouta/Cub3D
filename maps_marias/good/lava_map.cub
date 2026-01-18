@@ -1,0 +1,16 @@
+NO ./textures_marias/volcano-wall.xpm
+SO ./textures_marias/volcano-wall.xpm
+WE ./textures_marias/volcano-wall.xpm
+EA ./textures_marias/volcano-wall.xpm
+
+F 117, 0, 0
+C 48, 0, 0
+
+111111
+100001
+101101
+101101
+100101
+100001
+1011N1
+111111
