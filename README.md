@@ -18,7 +18,7 @@ How to use:
 **Raycasting Process:**
 
 1) First we need to figure out where the player is looking and what the player can see. The direction where the player is currently facing is represented by a vector dir_x and dir_y. We need to use a vector because it gives precise direction (allows the in-between angles when the player rotates).
-2) What the player sees defines the *FOV* and it is a vector perpendicular to the player's direction vector. It determinates the left and right edge of what the player sees. Points left/right across the screen. Everything inside the *FOV* is what the player sees, and everything inside it will be rendered.
+2) What the player sees defines the FOV and it is a vector perpendicular to the player's direction vector. It determinates the left and right edge of what the player sees. Points left/right across the screen. Everything inside the FOV is what the player sees, and everything inside it will be rendered.
 3) How to render the 3D world: we send one ray for each vertical stripe of pixels on the screen - the ray sweeps across the FOV and uses DDA Algorithm to figure out the distance to a wall and that's how it gets rendered column by column.
 
 **DDA Algorithm**
