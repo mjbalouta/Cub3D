@@ -31,8 +31,8 @@ This algorithm helps to figure out which square (tile) on the 2D map does the ra
 
 
 
-Some links with great explanations:
-https://ismailassil.medium.com/ray-casting-c-8bfae2c2fc13
-https://devabdilah.medium.com/3d-ray-casting-game-with-cub3d-7a116376056a
+**Some links with great explanations:**
+1) https://ismailassil.medium.com/ray-casting-c-8bfae2c2fc13
+2) https://devabdilah.medium.com/3d-ray-casting-game-with-cub3d-7a116376056a
 
 Some of the textures in the *textures* directory are images from the internet and some were created by us.

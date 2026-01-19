@@ -81,12 +81,7 @@ void	parse_texture_line(char *line, t_game *game, int i)
 void	check_path_name(char *path, t_game *game)
 {
 	char	*extension;
-	char	*file;
 
-	file = ft_strrchr(path, '/');
-	file++;
-	if (ft_strlen(file) <= 4)
-		print_exit_free(XPM_ERROR, 1, game);
 	extension = ft_strrchr(path, '.');
 	if (!extension)
 		print_exit_free(XPM_ERROR, 1, game);
