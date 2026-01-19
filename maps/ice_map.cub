@@ -1,7 +1,7 @@
-NO ./textures_marias/ice.xpm
-SO ./textures_marias/ice.xpm
-WE ./textures_marias/ice.xpm
-EA ./textures_marias/ice.xpm
+NO ./textures/ice.xpm
+SO ./textures/ice.xpm
+WE ./textures/ice.xpm
+EA ./textures/ice.xpm
 
 F 139, 188, 204
 C 9, 33, 41

@@ -1,7 +1,7 @@
-NO ./textures_marias/Wood1.xpm
-SO ./textures_marias/Wood2.xpm
-WE ./textures_marias/Wood3.xpm
-EA ./textures_marias/Wood4.xpm
+NO ./textures/Wood1.xpm
+SO ./textures/Wood2.xpm
+WE ./textures/Wood3.xpm
+EA ./textures/Wood4.xpm
 
 F 196, 178, 153
 C 23, 18, 11
