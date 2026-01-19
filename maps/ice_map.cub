@@ -1,7 +1,7 @@
-NO ./textures/ice.xpm
-SO ./textures/ice.xpm
-WE ./textures/ice.xpm
-EA ./textures/ice.xpm
+NO ./textures/scrat.xpm
+SO ./textures/scrat.xpm
+WE ./textures/scrat.xpm
+EA ./textures/scrat.xpm
 
 F 139, 188, 204
 C 9, 33, 41

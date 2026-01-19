@@ -15,6 +15,10 @@ int	validate_filename(char *str)
 	ext = ft_strrchr(str, '.');
 	if (!ext)
 		return (1);
+	ext--;
+	if (ext[0] == '/')
+		return (1);
+	ext++;
 	if (ft_strncmp(ext, ".cub", 5) != 0)
 		return (1);
 	return (0);

@@ -66,14 +66,10 @@ void	checks_identifier(char *line, t_game *game)
  * @param game 
  * @return void 
  */
-void	parse_file_info(char *file, t_game *game)
+void	parse_file_info(t_game *game, int fd)
 {
-	int		fd;
 	char	*line;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		print_exit_free(OPEN_ERROR, 1, game);
 	while (tracks_identified_info(game) == 1)
 	{
 		line = get_next_line(fd);
@@ -102,5 +98,16 @@ void	parse_file_info(char *file, t_game *game)
  */
 void	validate_file(char *file, t_game *game)
 {
-	parse_file_info(file, game);
+	int	fd;
+
+	fd = open(file, __O_DIRECTORY);
+	if (fd >= 0)
+	{
+		close(fd);
+		print_exit_free(DIR_ERROR, 1, game);
+	}
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		print_exit_free(OPEN_ERROR, 1, game);
+	parse_file_info(game, fd);
 }
