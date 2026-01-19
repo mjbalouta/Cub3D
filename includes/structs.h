@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 16:09:52 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/19 16:11:56 by mjoao-fr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -18,7 +30,7 @@ typedef struct s_player
 	int		rotate_right;
 }	t_player;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -27,8 +39,7 @@ typedef	struct s_img
 	int		endian;
 }	t_img;
 
-
-typedef	struct s_ray
+typedef struct s_ray
 {
 	double	camera_x; //horizontal position in the camera's plane
 	double	ray_dir_x; //horizontal direction of the ray in the world
@@ -37,15 +48,15 @@ typedef	struct s_ray
 	int		map_y; //vertical map's cell where the ray is
 	double	side_dist_x; //horizontal distance from ray to next gridline
 	double	side_dist_y; //vertical distance from ray to next gridline
-	double	delta_dist_x; //how much the ray goes horizontaly to cross an entire cell
-	double	delta_dist_y; //how much the ray goes vertically to cross an entire cell
+	double	delta_dist_x; //ray goes horizontaly to cross an entire cell
+	double	delta_dist_y; //ray goes vertically to cross an entire cell
 	double	perp_wall_dist; //perpendicalr distance from camera to wall
 	int		step_x; //horizontal step's direction
 	int		step_y; //vertical step's direction
-	int		side; //which type of wall was hit (0 vertical - X, 1 horizontal - Y)
+	int		side; //wall was hit (0 vertical - X, 1 horizontal - Y)
 }	t_ray;
 
-typedef	struct s_wall
+typedef struct s_wall
 {
 	int	line_height;
 	int	draw_start;

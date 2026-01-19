@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 16:09:47 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/19 16:12:20 by mjoao-fr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -40,7 +52,6 @@ int		count_digits_string(char *str);
 int		count_digits_numbers(int num);
 void	identify_direction(char *line, int i, t_game *game);
 int		checks_walkable_chars(char tile);
-
 
 //---------------------------CLEAN---------------------------
 

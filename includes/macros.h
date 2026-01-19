@@ -1,7 +1,19 @@
-#ifndef MACROS_H
-#define MACROS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   macros.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 16:09:49 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/19 16:12:59 by mjoao-fr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//----------------------------PARSING ERRORS-------------------------------------
+#ifndef MACROS_H
+# define MACROS_H
+
+//----------------------------PARSING ERRORS------------------------------------
 
 # define ARGS_ERROR "The program must be run with a something.cub file."
 # define WALLS_ERROR "The map must be surrounded by walls (1)."
@@ -34,7 +46,7 @@ WE, EA and F, C first and then the map."
 # define DIR_ERROR "File cannot be a directory."
 # define EMPTY_ERROR "Empty file."
 
-//------------------------------ALGORITHM ERRORS-----------------------------------
+//------------------------------ALGORITHM ERRORS--------------------------------
 
 # define CREATE_SCREEN_ERROR "Failed to create screen image"
 # define GET_SCREEN_ERROR "Failed to get screen image addr"
