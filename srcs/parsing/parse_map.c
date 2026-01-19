@@ -69,10 +69,10 @@ void	check_walls(t_game *game)
 				if (i == 0 || i == game->map.height - 1
 					|| j == 0 || j == ((int)ft_strlen(map[i]) - 2))
 					print_exit_free(WALLS_ERROR, 1, game);
-				else if (is_whitespace(map[i - 1][j])
-					|| is_whitespace(map[i + 1][j])
-					|| is_whitespace(map[i][j - 1])
-					|| is_whitespace(map[i][j + 1]))
+				else if (!map[i - 1][j] || is_whitespace(map[i - 1][j])
+					|| !map[i + 1][j] || is_whitespace(map[i + 1][j])
+					|| !map[i][j - 1] || is_whitespace(map[i][j - 1])
+					|| !map[i][j + 1] || is_whitespace(map[i][j + 1]))
 					print_exit_free (WALLS_ERROR, 1, game);
 			}
 		}

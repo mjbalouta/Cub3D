@@ -28,9 +28,10 @@ Must be between 0 and 255 only and without spaces in between numbers."
 # define TEX_DIRECTORY_ERROR "Texture path is a directory."
 # define OPEN_PATH_ERROR "Unable to open a texture's path."
 # define IDENTIFIER_ERROR "Invalid identifier."
-# define MISS_ID_ERROR "Missing identifier. Expected definitions of NO, SO,\
+# define MISS_ID_ERROR "Missing identifier. Expected definitions of NO, SO, \
 WE, EA and F, C first and then the map."
 # define OPEN_ERROR "Unable to open the file."
+# define DIR_ERROR "File cannot be a directory."
 # define EMPTY_ERROR "Empty file."
 
 //------------------------------ALGORITHM ERRORS-----------------------------------

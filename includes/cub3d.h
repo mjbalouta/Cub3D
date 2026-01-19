@@ -17,7 +17,7 @@
 int		validate_filename(char *str);
 void	validate_args(int ac, char **av, t_game *game);
 void	validate_file(char *file, t_game *game);
-void	parse_file_info(char *file, t_game *game);
+void	parse_file_info(t_game *game, int fd);
 void	parse_texture_line(char *line, t_game *game, int i);
 void	define_texture(int direction, t_game *game, char *line, int i);
 int		parse_line(char *line, t_game *game);

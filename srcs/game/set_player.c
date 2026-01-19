@@ -32,7 +32,7 @@ void	set_weast_east(t_game *game, char orientation)
 		game->player.dir_x = -1.0;
 		game->player.dir_y = 0.0;
 		game->player.planex = 0.0;
-		game->player.planey = 0.66;
+		game->player.planey = -0.66;
 	}
 }
 
