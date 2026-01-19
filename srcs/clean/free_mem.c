@@ -48,9 +48,9 @@ void	free_mem(t_game *game)
 
 	free_textures(game);
 	free_images(game);
-	if (game->floor_color.code)
+	if (game->floor_color.code != NULL)
 		free(game->floor_color.code);
-	if (game->sky_color.code)
+	if (game->sky_color.code != NULL)
 		free(game->sky_color.code);
 	i = game->map.height - 1;
 	while (i >= 0)
