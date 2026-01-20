@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:36 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/20 10:53:09 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:12:30 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,31 @@ int	checks_walkable_chars(char tile)
  */
 void	check_walls(t_game *game)
 {
-    int		i;
-    int		j;
-    char	**map;
+	int		i;
+	int		j;
+	char	**map;
 
-    i = -1;
-    map = game->map.map;
-    while (map[++i])
-    {
-        j = -1;
-        while (map[i][++j] && map[i][j] != '\n')
-        {
-            if (checks_walkable_chars(map[i][j]))
-            {
-                if (i == 0 || i == game->map.height - 1
-                    || j == 0 || j == ((int)ft_strlen(map[i]) - 1))
-                    print_exit_free(WALLS_ERROR, 1, game);
-                else if (j >= (int)ft_strlen(map[i - 1])
+	i = -1;
+	map = game->map.map;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j] && map[i][j] != '\n')
+		{
+			if (checks_walkable_chars(map[i][j]))
+			{
+				if (i == 0 || i == game->map.height - 1
+					|| j == 0 || j == ((int)ft_strlen(map[i]) - 1))
+					print_exit_free(WALLS_ERROR, 1, game);
+				else if (j >= (int)ft_strlen(map[i - 1])
 					|| is_wspace(map[i - 1][j])
-                    || j >= (int)ft_strlen(map[i + 1])
-                    || is_wspace(map[i + 1][j]) || is_wspace(map[i][j - 1])
-                    || is_wspace(map[i][j + 1]))
-                    print_exit_free (WALLS_ERROR, 1, game);
-            }
-        }
-    }
+					|| j >= (int)ft_strlen(map[i + 1])
+					|| is_wspace(map[i + 1][j]) || is_wspace(map[i][j - 1])
+					|| is_wspace(map[i][j + 1]))
+					print_exit_free (WALLS_ERROR, 1, game);
+			}
+		}
+	}
 }
 
 void	check_players(t_game *game)
