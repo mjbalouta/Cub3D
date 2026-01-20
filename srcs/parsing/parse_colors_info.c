@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:33 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:34 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 			print_exit_free(DUPLICATED_COLOR_ERROR, 1, game);
 		}
 		game->floor_color.defined = 1;
-		while (line[i] && is_whitespace(line[i]))
+		while (line[i] && is_wspace(line[i]))
 			i++;
 		game->floor_color.code = ft_strtrim(line + i, "\n");
 	}
@@ -42,7 +42,7 @@ void	define_colors(t_game *game, int i, char *line, int place)
 			print_exit_free(DUPLICATED_COLOR_ERROR, 1, game);
 		}
 		game->sky_color.defined = 1;
-		while (line[i] && is_whitespace(line[i]))
+		while (line[i] && is_wspace(line[i]))
 			i++;
 		game->sky_color.code = ft_strtrim(line + i, "\n");
 	}
@@ -59,9 +59,9 @@ void	parse_color_line(char *line, t_game *game, int i)
 {
 	if (line[i] && line[i + 1])
 	{
-		if (line[i] == 'F' && is_whitespace(line[i + 1]))
+		if (line[i] == 'F' && is_wspace(line[i + 1]))
 			define_colors(game, i + 1, line, 1);
-		else if (line[i] == 'C' && is_whitespace(line[i + 1]))
+		else if (line[i] == 'C' && is_wspace(line[i + 1]))
 			define_colors(game, i + 1, line, 2);
 		else
 		{
@@ -127,7 +127,7 @@ void	validate_color_codes(t_game *game, char *code_str, char option)
 	while (code_str[++i])
 	{
 		if (!ft_isdigit(code_str[i]) && code_str[i] != ','
-			&& !is_whitespace(code_str[i])
+			&& !is_wspace(code_str[i])
 			&& code_str[i] != '+' && code_str[i] != '-')
 			print_exit_free(RGB_ERROR, 1, game);
 	}

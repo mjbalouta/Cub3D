@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:09:47 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:12:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size);
 int		list_size(t_map_file *map_list);
 void	check_players(t_game *game);
 int		tracks_identified_info(t_game *game);
-int		is_whitespace(char a);
+int		is_wspace(char a);
 int		count_digits_string(char *str);
 int		count_digits_numbers(int num);
 void	identify_direction(char *line, int i, t_game *game);

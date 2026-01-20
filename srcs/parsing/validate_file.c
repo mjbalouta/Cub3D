@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:52 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:53 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	checks_identifier(char *line, t_game *game)
 	int	i;
 
 	i = 0;
-	while (line[i] && (is_whitespace(line[i]) || line[i] == '\n'))
+	while (line[i] && (is_wspace(line[i]) || line[i] == '\n'))
 		i++;
 	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		parse_texture_line(line, game, i);

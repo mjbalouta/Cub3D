@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:28 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:38:43 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,12 @@ void	create_map_copy(t_map_file **map_list, t_game *game, int size)
 
 	temp = *map_list;
 	i = 0;
-	skip_newline(&temp, map_list, size, game);
+	size = skip_newline(&temp, map_list, size, game);
 	allocate_map_mem(game, size, map_list);
 	while (temp)
 	{
+		if (temp->line[ft_strlen(temp->line) - 1] == '\n')
+			temp->line[ft_strlen(temp->line) - 1] = '\0';
 		game->map.map[i] = ft_strdup(temp->line);
 		if (!game->map.map[i++])
 		{

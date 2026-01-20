@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:42 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:43 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	list_size(t_map_file *map_list)
  * @param a 
  * @return int 
  */
-int	is_whitespace(char a)
+int	is_wspace(char a)
 {
 	if ((a >= 9 && a <= 13) || a == ' ')
 		return (1);

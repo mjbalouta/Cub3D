@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:08:39 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:40 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 10:52:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 		print_exit_free(DUPLICATED_TEX_ERROR, 1, game);
 	}
 	game->texture[direction].defined = 1;
-	while (line[i] && !is_whitespace(line[i]))
+	while (line[i] && !is_wspace(line[i]))
 		i++;
-	while (line[i] && is_whitespace(line[i]))
+	while (line[i] && is_wspace(line[i]))
 		i++;
 	game->texture[direction].path = ft_strtrim(line + i, "\n");
 }
@@ -45,20 +45,20 @@ void	define_texture(int direction, t_game *game, char *line, int i)
 void	identify_direction(char *line, int i, t_game *game)
 {
 	if ((line[i] == 'N' && line[i + 1] == 'O'
-			&& is_whitespace(line[i + 2]))
-		|| (line[i] == 'N' && is_whitespace(line[i + 1])))
+			&& is_wspace(line[i + 2]))
+		|| (line[i] == 'N' && is_wspace(line[i + 1])))
 		define_texture(0, game, line, i);
 	else if ((line[i] == 'S' && line[i + 1] == 'O'
-			&& is_whitespace(line[i + 2]))
-		|| (line[i] == 'S' && is_whitespace(line[i + 1])))
+			&& is_wspace(line[i + 2]))
+		|| (line[i] == 'S' && is_wspace(line[i + 1])))
 		define_texture(1, game, line, i);
 	else if ((line[i] == 'W' && line[i + 1] == 'E'
-			&& is_whitespace(line[i + 2]))
-		|| (line[i] == 'W' && is_whitespace(line[i + 1])))
+			&& is_wspace(line[i + 2]))
+		|| (line[i] == 'W' && is_wspace(line[i + 1])))
 		define_texture(2, game, line, i);
 	else if ((line[i] == 'E' && line[i + 1] == 'A'
-			&& is_whitespace(line[i + 2]))
-		|| (line[i] == 'E' && is_whitespace(line[i + 1])))
+			&& is_wspace(line[i + 2]))
+		|| (line[i] == 'E' && is_wspace(line[i + 1])))
 		define_texture(3, game, line, i);
 	else
 	{
